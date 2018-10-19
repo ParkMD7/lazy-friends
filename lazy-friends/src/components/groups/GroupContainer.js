@@ -13,7 +13,9 @@ class GroupContainer extends Component {
   componentDidMount() {
     fetch('http://localhost:3000/groups')
     .then(res => res.json())
-    .then( groups => this.setState({groups}))
+    .then( groups => {
+      this.setState({groups, currentGroup: groups[0]})
+    })
   }
 
   groupToDisplay = () => {
@@ -21,14 +23,14 @@ class GroupContainer extends Component {
   }
 
   handleGroupChange = (event, semanticStuff) => {
-    const currentGroup = groups.find( group => group.id === semanticStuff.value)
+    const currentGroup = this.state.groups.find( group => group.id === semanticStuff.value)
     this.setState({currentGroup})
   }
 
   render(){
     return (
       <Container fluid>
-        <GroupDropdown groups={groups} handleGroupChange={this.handleGroupChange} />
+        <GroupDropdown groups={this.state.groups} handleGroupChange={this.handleGroupChange} />
         <GroupList group={ this.groupToDisplay() } />
       </Container>
     )

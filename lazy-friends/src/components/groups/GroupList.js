@@ -2,10 +2,10 @@ import React from 'react'
 import GroupMember from './GroupMember'
 
 const GroupList = ({ group }) => {
-  if(group === JSON.stringify({})){
+  if(JSON.stringify(group) === JSON.stringify({})){
     return null
   }
-  
+
   return (
     <div>
       <div>
