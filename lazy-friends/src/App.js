@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import NavBar from './components/NavBar'
-<<<<<<< HEAD
 // import NewNavBar from './components/NewNavBar'
-=======
->>>>>>> d710e30c77c6978bb60413029662ebd9211a22da
 import MainPage from './components/MainPage'
 import './App.css';
 

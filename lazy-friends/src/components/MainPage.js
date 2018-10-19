@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import GroupContainer from './groups/GroupContainer'
 import { Grid } from 'semantic-ui-react'
 
+
+
+
 class MainPage extends Component {
+
+
 
   render() {
     return (
