@@ -7,7 +7,7 @@ class MainPage extends Component {
   render() {
     return (
       <Grid container columns={3}>
-        
+
           <Grid.Column>
             <GroupContainer />
           </Grid.Column>
@@ -19,7 +19,7 @@ class MainPage extends Component {
           <Grid.Column>
             <h1>Suggestions</h1>
           </Grid.Column>
-        
+
       </Grid>
     );
   }
