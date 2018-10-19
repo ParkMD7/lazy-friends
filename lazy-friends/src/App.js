@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import NavBar from './components/NavBar'
 // import NewNavBar from './components/NewNavBar'
 import MainPage from './components/MainPage'
+import NewGroupForm from './components/groups/NewGroupForm'
 import './App.css';
 
 class App extends Component {
@@ -17,7 +18,7 @@ class App extends Component {
           <br /><br />
           <Route exact path="/" component={MainPage} />
           <Route exact path='/profile' render={ () => <h1>Profile</h1>} />
-          <Route exact path='/newgroup' render={ () => <h1>New Group</h1>} />
+          <Route exact path='/newgroup' component={NewGroupForm} />
           <Route exact path='/users' render={ () => <h1>Users</h1>} />
         </React.Fragment>
       </BrowserRouter>
