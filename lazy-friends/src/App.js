@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <React.Fragment>
-        <br />
+          <br />
           <div>
             <NavBar />
           </div>

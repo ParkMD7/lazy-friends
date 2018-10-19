@@ -30,7 +30,7 @@ class GroupContainer extends Component {
   render(){
     return (
       <Container fluid>
-        <GroupDropdown groups={this.state.groups} handleGroupChange={this.handleGroupChange} />
+        <GroupDropdown groups={this.state.groups} handleGroupChange={this.handleGroupChange} currentGroup={this.state.currentGroup} />
         <GroupList group={ this.groupToDisplay() } />
       </Container>
     )
