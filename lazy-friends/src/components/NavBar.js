@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
+import { Icon } from 'semantic-ui-react'
 
 class NavBar extends Component {
 
@@ -13,11 +14,11 @@ class NavBar extends Component {
       color: 'white',
     }
     return (
-      <div>
-        <NavLink to='/' style={link}>Home</NavLink>
-        <NavLink to='/profile' style={link}>Profile</NavLink>
-        <NavLink to='/newgroup' style={link}>New Group</NavLink>
-        <NavLink to='/users' style={link}>Users</NavLink>
+      <div className="App">
+        <NavLink to='/' style={link}><Icon className="home" size='big' />Home</NavLink>
+        <NavLink to='/profile' style={link}><Icon className="user" size='big' />Profile</NavLink>
+        <NavLink to='/newgroup' style={link}><Icon className="add" size='big'/>New Group</NavLink>
+        <NavLink to='/users' style={link}><Icon className='group' size='big'/>Users</NavLink>
       </div>
     );
   }
