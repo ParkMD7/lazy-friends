@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
 import GroupContainer from './groups/GroupContainer'
+import { Grid } from 'semantic-ui-react'
 
 class MainPage extends Component {
 
   render() {
     return (
-      <div>
-        <GroupContainer />
-      </div>
+      <Grid container columns={3}>
+        
+          <Grid.Column>
+            <GroupContainer />
+          </Grid.Column>
+
+          <Grid.Column>
+            <h1>Google Map</h1>
+          </Grid.Column>
+
+          <Grid.Column>
+            <h1>Suggestions</h1>
+          </Grid.Column>
+        
+      </Grid>
     );
   }
 
