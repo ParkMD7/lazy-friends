@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GroupList from './GroupList'
 import GroupDropdown from './GroupDropdown'
-import {groups} from './group'
+// import {groups} from './group'
 import { Container } from 'semantic-ui-react'
 
 class GroupContainer extends Component {

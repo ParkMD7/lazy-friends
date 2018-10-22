@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import GroupContainer from './groups/GroupContainer'
 import { Grid } from 'semantic-ui-react'
-import { BrowserRouter, Redirect, Route } from 'react-router-dom'
-import Login from './forms/Login'
+import { Redirect } from 'react-router-dom'
 
 class MainPage extends Component {
   displayMainPage = () => {

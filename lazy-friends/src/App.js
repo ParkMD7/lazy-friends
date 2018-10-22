@@ -8,14 +8,6 @@ import Login from './components/forms/Login'
 import SignUp from './components/forms/SignUp'
 import './App.css';
 
-function handleErrors(response) {
-    console.log(response)
-    if (!response.ok) {
-        throw Error(response.statusText);
-    }
-    return response.json();
-}
-
 class App extends Component {
   state = {
     currentUser: {
@@ -39,15 +31,20 @@ class App extends Component {
     })
     .then( res => res.json())
     .then( currentUser => {
-      this.setState({
-        currentUser: {
-          id: currentUser.id,
-          username: currentUser.username,
-          name: currentUser.name,
-          location: currentUser.location,
-          coordinates: currentUser.coordinates
-        }
-      }, this.handleSignup)
+      if(currentUser.status === 'error'){
+        const errors = currentUser.message
+        alert(errors)
+      } else {
+        this.setState({
+          currentUser: {
+            id: currentUser.id,
+            username: currentUser.username,
+            name: currentUser.name,
+            location: currentUser.location,
+            coordinates: currentUser.coordinates
+          }
+        }, this.handleSignup)
+      }
     })
   }
 
@@ -109,9 +106,11 @@ class App extends Component {
       <BrowserRouter>
         <React.Fragment>
           <br />
+          { this.state.currentUser.username !== '' ?
           <div>
             <NavBar currentUser={this.state.currentUser} handleSignOut={this.handleSignOut} />
-          </div>
+          </div> : null
+          }
           <br /><br />
           {this.handleSignup()}
           <Route exact path="/" component={ () => <MainPage currentUser={this.state.currentUser} />} />
