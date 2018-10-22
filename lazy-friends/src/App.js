@@ -61,11 +61,26 @@ class App extends Component {
             location: currentUser.location,
             coordinates: currentUser.coordinates
           }
-        })
+        }, this.handleSignup)
       }
     })
     .catch(err => {
       console.log(err)
+    })
+  }
+
+  handleSignup = () => {
+    return this.state.currentUser.username !== '' ? <Redirect to='/'/> : <Redirect to='/login'/>
+  }
+
+  handleSignOut = () => {
+    this.setState({
+      currentUser: {
+        id: 0,
+        username: '',
+        name: '',
+        location: ''
+      }
     })
   }
 
@@ -75,10 +90,11 @@ class App extends Component {
         <React.Fragment>
           <br />
           <div>
-            <NavBar />
+            <NavBar currentUser={this.state.currentUser} handleSignOut={this.handleSignOut} />
           </div>
           <br /><br />
-          <Route exact path="/" render={ () => <MainPage currentUser={this.state.currentUser} />} />
+          {this.handleSignup()}
+          <Route exact path="/" component={ () => <MainPage currentUser={this.state.currentUser} />} />
           <Route exact path='/profile' render={ () => <h1>Profile</h1>} />
           <Route exact path='/newgroup' component={NewGroupForm} />
           <Route exact path='/users' render={ () => <h1>Users</h1>} />

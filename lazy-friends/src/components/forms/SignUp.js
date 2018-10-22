@@ -24,19 +24,19 @@ class SignUp extends Component {
           <Header>Sign Up</Header>
           <Container textAlign='left'>
             <Label>Name *</Label>
-            <Input size='large' fluid name='name' value={this.state.name} type='text' placeholder="Name" onChange={this.handleChange} /><br/><br/>
+            <Input size='large' fluid name='name' value={this.state.name} type='text' placeholder="Name" onChange={this.handleChange} />
           </Container>
           <Container textAlign='left'>
             <Label>Email *</Label>
-            <Input size='large' fluid name='email' value={this.state.email} type='text' placeholder="Email" onChange={this.handleChange} /><br/><br/>
+            <Input size='large' fluid name='email' value={this.state.email} type='text' placeholder="Email" onChange={this.handleChange} />
           </Container>
           <Container textAlign='left'>
             <Label>Home Location *</Label>
-            <Input size='large' fluid name='location' value={this.state.location} type='text' placeholder="Location" onChange={this.handleChange} /><br/><br/>
+            <Input size='large' fluid name='location' value={this.state.location} type='text' placeholder="Location" onChange={this.handleChange} />
           </Container>
           <Container textAlign='left'>
             <Label>Username *</Label>
-            <Input size='large' fluid name='username' value={this.state.username} type='text' placeholder="Username" onChange={this.handleChange} /><br/><br/>
+            <Input size='large' fluid name='username' value={this.state.username} type='text' placeholder="Username" onChange={this.handleChange} />
           </Container>
           <Container textAlign='left'>
             <Label>Password (6 characters minimum)</Label>
