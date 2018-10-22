@@ -14,7 +14,7 @@ class GroupContainer extends Component {
     fetch('http://localhost:3000/groups')
     .then(res => res.json())
     .then( groups => {
-      this.setState({groups, currentGroup: groups[0]})
+      this.setState({groups: groups.groups, currentGroup: groups.groups[0]})
     })
   }
 

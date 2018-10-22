@@ -6,6 +6,7 @@ import MainPage from './components/MainPage'
 import NewGroupForm from './components/groups/NewGroupForm'
 import Login from './components/forms/Login'
 import SignUp from './components/forms/SignUp'
+import Groups from './components/groups/Groups'
 import './App.css';
 
 class App extends Component {
@@ -116,7 +117,7 @@ class App extends Component {
           <Route exact path="/" component={ () => <MainPage currentUser={this.state.currentUser} />} />
           <Route exact path='/profile' render={ () => <h1>Profile</h1>} />
           <Route exact path='/newgroup' component={NewGroupForm} />
-          <Route exact path='/users' render={ () => <h1>Users</h1>} />
+          <Route exact path='/groups' component={ () => <Groups currentUser={this.state.currentUser} />} />
           <Route exact path='/signup' render={ () => <SignUp handleSubmit={this.handleSubmit} /> } />
           <Route exact path='/login' render={ () => <Login handleLogin={this.handleLogin} /> } />
         </React.Fragment>
