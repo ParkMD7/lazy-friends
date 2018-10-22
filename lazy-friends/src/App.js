@@ -29,6 +29,26 @@ class App extends Component {
   handleLogin = (event, value) => {
     event.preventDefault()
     console.log(value)
+    fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(value)
+    })
+    .then( res => res.json())
+    .then( currentUser => {
+      this.setState({
+        currentUser: {
+          id: currentUser.id,
+          username: currentUser.username,
+          name: currentUser.name,
+          location: currentUser.location,
+          coordinates: currentUser.coordinates
+        }
+      }, this.handleSignup)
+    })
   }
 
   handleSubmit = (event, value) => {
