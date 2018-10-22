@@ -3,6 +3,8 @@ import GroupContainer from './groups/GroupContainer'
 import MapComponent from './map/MapComponent'
 import { config } from '../config.js'
 import { Grid } from 'semantic-ui-react'
+import { BrowserRouter, Redirect, Route } from 'react-router-dom'
+import Login from './forms/Login'
 
 
 
@@ -39,6 +41,7 @@ class MainPage extends Component {
 
   render() {
     // console.log(this.state.coordinates);
+  displayMainPage = () => {
     return (
       <Grid container columns={3}>
 
@@ -56,6 +59,15 @@ class MainPage extends Component {
           </Grid.Column>
 
       </Grid>
+    )
+  }
+
+  render() {
+    return (
+        <div>
+          { this.props.currentUser.username === '' ?
+          <Redirect to='/login' /> : this.displayMainPage() }
+        </div>
     );
   }
 
