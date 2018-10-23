@@ -11,11 +11,6 @@ class GroupContainer extends Component {
   }
 
   componentDidMount() {
-    // fetch('http://localhost:3000/groups')
-    // .then(res => res.json())
-    // .then( groups => {
-    //   this.setState({groups: groups.groups, currentGroup: groups.groups[0]})
-    // })
     this.setState({
       currentGroup: this.props.groups[0]
     })
