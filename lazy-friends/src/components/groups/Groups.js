@@ -16,8 +16,6 @@ class Groups extends Component {
   }
 
   handleGroupJoin = group => {
-    // console.log(group)
-    // console.log(this.props.currentUser)
     fetch(`http://localhost:3000/groups/${group.id}`, {
       method: 'PATCH',
       headers: {
@@ -28,8 +26,11 @@ class Groups extends Component {
         user: this.props.currentUser.id
       })
     }).then(res => res.json())
-    .then( updatedGroup => {
-      console.log(updatedGroup)
+    .then( groupObj => {
+      const groups = this.state.groups.filter( group => group.id !== groupObj.id)
+      this.setState({
+        groups
+      })
     })
   }
 
@@ -45,7 +46,7 @@ class Groups extends Component {
         return userGroups
       }
     })
-    
+
     return groupsWithoutCurrentUser.map( group => {
       return <p key={group.id} onClick={() => this.handleGroupJoin(group)}> {group.name} </p>
     })

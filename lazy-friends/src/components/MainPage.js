@@ -9,7 +9,7 @@ class MainPage extends Component {
       <Grid container columns={3}>
 
           <Grid.Column>
-            <GroupContainer />
+            <GroupContainer groups={this.props.currentUser.groups} />
           </Grid.Column>
 
           <Grid.Column>
