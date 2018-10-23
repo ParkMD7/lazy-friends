@@ -23,7 +23,7 @@ class App extends Component {
 
   handleLogin = (event, value) => {
     event.preventDefault()
-    console.log(value)
+    // console.log(value)
     fetch('http://localhost:3000/login', {
       method: 'POST',
       headers: {

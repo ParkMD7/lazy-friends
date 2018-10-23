@@ -5,17 +5,13 @@ import GroupDropdown from './GroupDropdown'
 import { Container } from 'semantic-ui-react'
 
 class GroupContainer extends Component {
+
   state = {
     currentGroup: {}
     // groups: []
   }
 
   componentDidMount() {
-    // fetch('http://localhost:3000/groups')
-    // .then(res => res.json())
-    // .then( groups => {
-    //   this.setState({groups: groups.groups, currentGroup: groups.groups[0]})
-    // })
     this.setState({
       currentGroup: this.props.groups[0]
     })
@@ -33,8 +29,16 @@ class GroupContainer extends Component {
   render(){
     return (
       <Container fluid>
-        <GroupDropdown groups={this.props.groups} handleGroupChange={this.handleGroupChange} currentGroup={this.state.currentGroup} />
-        <GroupList group={ this.groupToDisplay() } />
+        <GroupDropdown
+          groups={this.props.groups}
+          handleGroupChange={this.handleGroupChange}
+          currentGroup={this.state.currentGroup}
+        />
+        
+        <GroupList
+          group={ this.groupToDisplay() }
+          coords={this.props.coords}
+        />
       </Container>
     )
   }
