@@ -1,5 +1,6 @@
 import React from 'react'
 import GroupMember from './GroupMember'
+import { Card } from 'semantic-ui-react'
 
 class GroupList extends React.Component {
   state = {
@@ -33,21 +34,19 @@ class GroupList extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     if(JSON.stringify(this.props.group) === JSON.stringify({}) || this.props.group === undefined){
       return null
     }
     this.findMiddleCoords()
 
     return (
-      <div>
-        <div>
-          <h1>{this.props.group.name}</h1>
-          {this.props.group.users.map(groupUser => <GroupMember key={groupUser.id} {...groupUser} />)}
+        <div className="ui container center aligned">
+          <div>
+            <h1>{this.props.group.name}</h1>
+            {this.props.group.users.map(groupUser => <GroupMember key={groupUser.id} {...groupUser} />)}
+          </div>
         </div>
-        <div>
-          <button>Meet Up</button>
-        </div>
-      </div>
     );
   }
 }

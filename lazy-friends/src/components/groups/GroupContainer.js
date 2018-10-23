@@ -28,18 +28,20 @@ class GroupContainer extends Component {
 
   render(){
     return (
-      <Container fluid>
-        <GroupDropdown
-          groups={this.props.groups}
-          handleGroupChange={this.handleGroupChange}
-          currentGroup={this.state.currentGroup}
-        />
-        
-        <GroupList
-          group={ this.groupToDisplay() }
-          coords={this.props.coords}
-        />
-      </Container>
+      <div className="ui container center aligned">
+        <Container fluid>
+          <GroupDropdown
+            groups={this.props.groups}
+            handleGroupChange={this.handleGroupChange}
+            currentGroup={this.state.currentGroup}
+          />
+
+          <GroupList
+            group={ this.groupToDisplay() }
+            coords={this.props.coords}
+          />
+        </Container>
+      </div>
     )
   }
 
