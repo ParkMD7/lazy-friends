@@ -5,6 +5,7 @@ import GroupDropdown from './GroupDropdown'
 import { Container } from 'semantic-ui-react'
 
 class GroupContainer extends Component {
+
   state = {
     currentGroup: {}
     // groups: []
@@ -28,8 +29,16 @@ class GroupContainer extends Component {
   render(){
     return (
       <Container fluid>
-        <GroupDropdown groups={this.props.groups} handleGroupChange={this.handleGroupChange} currentGroup={this.state.currentGroup} />
-        <GroupList group={ this.groupToDisplay() } />
+        <GroupDropdown
+          groups={this.props.groups}
+          handleGroupChange={this.handleGroupChange}
+          currentGroup={this.state.currentGroup}
+        />
+        
+        <GroupList
+          group={ this.groupToDisplay() }
+          coords={this.props.coords}
+        />
       </Container>
     )
   }
