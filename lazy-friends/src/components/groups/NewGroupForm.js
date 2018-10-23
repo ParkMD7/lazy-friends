@@ -21,7 +21,7 @@ class NewGroupForm extends Component {
       },
       body: JSON.stringify({
         name: newGroupName,
-        user: 21
+        user: 57
       })
     })
   }

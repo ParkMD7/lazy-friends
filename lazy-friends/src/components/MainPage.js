@@ -3,8 +3,7 @@ import GroupContainer from './groups/GroupContainer'
 import MapComponent from './map/MapComponent'
 import { config } from '../config.js'
 import { Grid } from 'semantic-ui-react'
-import { BrowserRouter, Redirect, Route } from 'react-router-dom'
-import Login from './forms/Login'
+import { Redirect } from 'react-router-dom'
 
 
 
@@ -48,6 +47,10 @@ class MainPage extends Component {
         <Grid.Column>
           <h1>Groups</h1>
           {/* <GroupContainer /> */}
+        </Grid.Column>
+        
+        <Grid.Column>
+          <GroupContainer groups={this.props.currentUser.groups} />
         </Grid.Column>
 
         <Grid.Column>
