@@ -24,11 +24,12 @@ class GroupContainer extends Component {
   handleGroupChange = (event, semanticStuff) => {
     const currentGroup = this.props.groups.find( group => group.id === semanticStuff.value)
     this.setState({currentGroup})
+    this.props.groupChange(currentGroup)
   }
 
   render(){
     return (
-      <div className="ui container center aligned">
+      <div className="ui container center aligned" style={{height: '600px'}}>
         <Container fluid>
           <GroupDropdown
             groups={this.props.groups}

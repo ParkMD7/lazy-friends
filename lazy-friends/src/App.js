@@ -7,7 +7,7 @@ import NewGroupForm from './components/groups/NewGroupForm'
 import Login from './components/forms/Login'
 import SignUp from './components/forms/SignUp'
 import Groups from './components/groups/Groups'
-import { config } from './config'
+import { config } from './components/config'
 import './App.css';
 
 class App extends Component {

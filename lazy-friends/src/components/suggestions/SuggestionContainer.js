@@ -3,13 +3,11 @@ import SuggestionList from './SuggestionList'
 
 class SuggestionContainer extends Component {
 
-  componentWillMount() {
-    
-  }
-
   render() {
     return (
-      <SuggestionList />
+      <div className="ui container center aligned" style={{overflowY: 'scroll', height: '600px'}}>
+        <SuggestionList />
+      </div>
     );
   }
 

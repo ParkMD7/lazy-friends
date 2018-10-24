@@ -21,32 +21,35 @@ class GroupList extends React.Component {
         })
         const middleLat = (totalLat / this.props.group.users.length).toFixed(6)
         const middleLng = (totalLng / this.props.group.users.length).toFixed(6)
-        middleCoords = `${middleLat}, ${middleLng}`
+        middleCoords = `${middleLat},${middleLng}`
         console.log(middleCoords);
-        if (middleCoords !== this.state.middleCoords){
-          this.setState({
-            middleCoords
-          })
-          this.props.coords(middleCoords)
-        }
+        // if (middleCoords !== this.state.middleCoords){
+        this.props.coords(middleCoords)
+          // this.setState({
+          //   middleCoords
+          // })
+        // }
       }
     }
   }
 
+  componentDidUpdate() {
+    this.findMiddleCoords()
+  }
+
   render() {
-    console.log(this.props);
     if(JSON.stringify(this.props.group) === JSON.stringify({}) || this.props.group === undefined){
       return null
     }
-    this.findMiddleCoords()
+    // this.findMiddleCoords()
 
     return (
-        <div className="ui container center aligned">
-          <div>
-            <h1>{this.props.group.name}</h1>
-            {this.props.group.users.map(groupUser => <GroupMember key={groupUser.id} {...groupUser} />)}
-          </div>
+      <div className="ui container center aligned">
+        <div>
+          <h1>Group: {this.props.group.name}</h1>
+          {this.props.group.users.map(groupUser => <GroupMember key={groupUser.id} {...groupUser} />)}
         </div>
+      </div>
     );
   }
 }
