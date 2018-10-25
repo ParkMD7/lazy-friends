@@ -17,6 +17,7 @@ class Login extends Component {
   render() {
     return (
       <Container text textAlign='center'>
+        <Header>Lazy Friends</Header>
         <form onSubmit={event => this.props.handleLogin(event, this.state)}>
           <Header>Log In</Header>
           <Input size='large' fluid name='username' value={this.state.username} type='text' placeholder="Username" onChange={this.handleChange} /><br/>

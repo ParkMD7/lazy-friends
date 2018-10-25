@@ -20,6 +20,7 @@ class SignUp extends Component {
   render() {
     return (
       <Container text textAlign='center'>
+      <Header>Lazy Friends</Header>
         <form onSubmit={event => this.props.handleSubmit(event, this.state)}>
           <Header>Sign Up</Header>
           <Container textAlign='left'>

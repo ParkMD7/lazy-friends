@@ -7,9 +7,9 @@ class SuggestionList extends React.Component {
     suggestions: []
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    this.getSuggestions()
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   this.getSuggestions()
+  // }
 
   checkResults = (results) => {
     let isEqual = true
@@ -29,7 +29,7 @@ class SuggestionList extends React.Component {
   getSuggestions = () => {
     let results
 
-    if(this.props.currentCoords.coordinates !== ''){
+    if(this.props.currentCoords !== ''){
       return fetch('http://localhost:3000/places', {
           method: 'POST',
           headers: {
@@ -37,7 +37,7 @@ class SuggestionList extends React.Component {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            coordinates: this.props.currentCoords.coordinates
+            coordinates: this.props.currentCoords
           })
         })
       .then(response => response.json())
@@ -57,6 +57,7 @@ class SuggestionList extends React.Component {
   }
 
   render(){
+    this.getSuggestions()
     if(this.state.suggestions.length === 0){
       return <p>Loading Suggestions...</p>
     }
@@ -70,7 +71,6 @@ class SuggestionList extends React.Component {
       )
     })
 
-
     return (
       <div>
         {suggestionItem}
@@ -81,7 +81,6 @@ class SuggestionList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentGroup: state.currentGroup,
     currentCoords: state.currentCoords
   }
 }

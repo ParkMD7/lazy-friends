@@ -10,6 +10,7 @@ import SignUp from './components/forms/SignUp'
 import Groups from './components/groups/Groups'
 import { config } from './components/config'
 import { loginOrSignup, signout } from './actions/currentUser'
+import { selectGroup } from './actions/currentGroup'
 import './App.css';
 
 
@@ -37,9 +38,13 @@ class App extends Component {
           name: currentUser.user.name,
           location: currentUser.user.location,
           coordinates: currentUser.user.coordinates,
-          groups: currentUser.user.groups
+          groups: currentUser.user.groups,
+          profile_url: currentUser.user.profile_url
         }
         this.props.loginOrSignup(user)
+        if(this.props.currentUser.groups.length !== 0){
+          this.props.selectGroup(this.props.currentUser.groups[0])
+        }
       }
     })
   }
@@ -85,9 +90,13 @@ class App extends Component {
             name: currentUser.user.name,
             location: currentUser.user.location,
             coordinates: currentUser.user.coordinates,
-            groups: currentUser.user.groups
+            groups: currentUser.user.groups,
+            profile_url: currentUser.user.profile_url
           }
           this.props.loginOrSignup(user)
+          if(this.props.currentUser.groups.length !== 0){
+            this.props.selectGroup(this.props.currentUser.groups[0])
+          }
         }
       })
       .catch(err => {
@@ -101,7 +110,14 @@ class App extends Component {
   }
 
   handleSignOut = () => {
-    this.props.signout()
+    const user = {
+      id: 0,
+      username: '',
+      name: '',
+      location: '',
+      groups: []
+    }
+    this.props.signout(user)
   }
 
   render() {
@@ -134,4 +150,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { loginOrSignup, signout })(App);
+export default connect(mapStateToProps, { loginOrSignup, signout, selectGroup })(App);
