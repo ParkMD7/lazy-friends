@@ -3,27 +3,16 @@ import GroupList from './GroupList'
 import GroupDropdown from './GroupDropdown'
 // import {groups} from './group'
 import { Container } from 'semantic-ui-react'
+import { selectGroup } from '../../actions/currentGroup'
+import { connect } from 'react-redux';
 
 class GroupContainer extends Component {
-
-  state = {
-    currentGroup: {}
-    // groups: []
-  }
-
-  componentDidMount() {
-    this.setState({
-      currentGroup: this.props.groups[0]
-    })
-  }
-
   groupToDisplay = () => {
-    return this.state.currentGroup
+    return this.props.currentGroup
   }
 
   handleGroupChange = (event, semanticStuff) => {
     const currentGroup = this.props.groups.find( group => group.id === semanticStuff.value)
-    this.setState({currentGroup})
     this.props.groupChange(currentGroup)
   }
 
@@ -34,7 +23,7 @@ class GroupContainer extends Component {
           <GroupDropdown
             groups={this.props.groups}
             handleGroupChange={this.handleGroupChange}
-            currentGroup={this.state.currentGroup}
+            currentGroup={this.props.currentGroup}
           />
 
           <GroupList
@@ -48,4 +37,10 @@ class GroupContainer extends Component {
 
 }
 
-export default GroupContainer;
+const mapStateToProps = (state) => {
+  return {
+    currentGroup: state.currentGroup
+  }
+}
+
+export default connect(mapStateToProps, { selectGroup })(GroupContainer);

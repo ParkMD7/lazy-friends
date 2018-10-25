@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom'
 import NavBar from './components/NavBar'
 // import NewNavBar from './components/NewNavBar'
@@ -8,18 +9,11 @@ import Login from './components/forms/Login'
 import SignUp from './components/forms/SignUp'
 import Groups from './components/groups/Groups'
 import { config } from './components/config'
+import { loginOrSignup, signout } from './actions/currentUser'
 import './App.css';
 
+
 class App extends Component {
-  state = {
-    currentUser: {
-      id: 0,
-      username: '',
-      name: '',
-      location: '',
-      groups: []
-    }
-  }
 
   handleLogin = (event, value) => {
     event.preventDefault()
@@ -37,16 +31,15 @@ class App extends Component {
         const errors = currentUser.message
         alert(errors)
       } else {
-        this.setState({
-          currentUser: {
-            id: currentUser.user.id,
-            username: currentUser.user.username,
-            name: currentUser.user.name,
-            location: currentUser.user.location,
-            coordinates: currentUser.user.coordinates,
-            groups: currentUser.user.groups
-          }
-        }, this.handleSignup)
+        const user = {
+          id: currentUser.user.id,
+          username: currentUser.user.username,
+          name: currentUser.user.name,
+          location: currentUser.user.location,
+          coordinates: currentUser.user.coordinates,
+          groups: currentUser.user.groups
+        }
+        this.props.loginOrSignup(user)
       }
     })
   }
@@ -86,16 +79,15 @@ class App extends Component {
           }).join('')
           alert(errors)
         } else {
-          this.setState({
-            currentUser: {
-              id: currentUser.user.id,
-              username: currentUser.user.username,
-              name: currentUser.user.name,
-              location: currentUser.user.location,
-              coordinates: currentUser.user.coordinates,
-              groups: currentUser.user.groups
-            }
-          }, this.handleSignup)
+          const user = {
+            id: currentUser.user.id,
+            username: currentUser.user.username,
+            name: currentUser.user.name,
+            location: currentUser.user.location,
+            coordinates: currentUser.user.coordinates,
+            groups: currentUser.user.groups
+          }
+          this.props.loginOrSignup(user)
         }
       })
       .catch(err => {
@@ -105,19 +97,11 @@ class App extends Component {
   }
 
   handleSignup = () => {
-    return this.state.currentUser.username !== '' ? <Redirect to='/'/> : <Redirect to='/login'/>
+    return this.props.currentUser.username !== '' ? <Redirect to='/'/> : <Redirect to='/login'/>
   }
 
   handleSignOut = () => {
-    this.setState({
-      currentUser: {
-        id: 0,
-        username: '',
-        name: '',
-        location: '',
-        groups: []
-      }
-    })
+    this.props.signout()
   }
 
   render() {
@@ -125,17 +109,17 @@ class App extends Component {
       <BrowserRouter>
         <React.Fragment>
           <br />
-          { this.state.currentUser.username !== '' ?
+          { this.props.currentUser.username !== '' ?
           <div>
-            <NavBar currentUser={this.state.currentUser} handleSignOut={this.handleSignOut} />
+            <NavBar currentUser={this.props.currentUser} handleSignOut={this.handleSignOut} />
           </div> : null
           }
           <br /><br />
           {this.handleSignup()}
-          <Route exact path="/" component={ () => <MainPage currentUser={this.state.currentUser} />} />
+          <Route exact path="/" component={ () => <MainPage currentUser={this.props.currentUser} />} />
           <Route exact path='/profile' render={ () => <h1>Profile</h1>} />
           <Route exact path='/newgroup' component={NewGroupForm} />
-          <Route exact path='/groups' component={ () => <Groups currentUser={this.state.currentUser} />} />
+          <Route exact path='/groups' component={ () => <Groups currentUser={this.props.currentUser} />} />
           <Route exact path='/signup' render={ () => <SignUp handleSubmit={this.handleSubmit} /> } />
           <Route exact path='/login' render={ () => <Login handleLogin={this.handleLogin} /> } />
         </React.Fragment>
@@ -144,4 +128,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.currentUser
+  }
+}
+
+export default connect(mapStateToProps, { loginOrSignup, signout })(App);

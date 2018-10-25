@@ -1,16 +1,14 @@
 import React from 'react';
 import SuggestionItem from './SuggestionItem';
+import { connect } from 'react-redux';
 
 class SuggestionList extends React.Component {
-
   state = {
     suggestions: []
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // if(JSON.stringify(prevState) !== JSON.stringify(this.state.suggestions)){
-      this.getSuggestions()
-
+    this.getSuggestions()
   }
 
   checkResults = (results) => {
@@ -21,19 +19,17 @@ class SuggestionList extends React.Component {
     }
 
     results.forEach( (result, index) => {
-      //debugger
       if(result.id !== this.state.suggestions[index].id){
         isEqual = false
       }
     })
-    console.log(isEqual)
     return isEqual
   }
 
   getSuggestions = () => {
     let results
 
-      if(this.props.mapCoords !== ''){
+    if(this.props.currentCoords.coordinates !== ''){
       return fetch('http://localhost:3000/places', {
           method: 'POST',
           headers: {
@@ -41,18 +37,16 @@ class SuggestionList extends React.Component {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            coordinates: this.props.mapCoords
+            coordinates: this.props.currentCoords.coordinates
           })
         })
       .then(response => response.json())
       .then(googleData => {
         if(googleData.status === 'OK'){
-          //debugger
           if(!(this.checkResults(googleData.results))){
-            console.log('check')
-          this.setState({
-            suggestions: googleData.results
-          })
+            this.setState({
+              suggestions: googleData.results
+            })
           }
         }
       })
@@ -85,4 +79,11 @@ class SuggestionList extends React.Component {
   }
 };
 
-export default SuggestionList;
+const mapStateToProps = (state) => {
+  return {
+    currentGroup: state.currentGroup,
+    currentCoords: state.currentCoords
+  }
+}
+
+export default connect(mapStateToProps)(SuggestionList);

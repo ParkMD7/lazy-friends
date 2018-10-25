@@ -1,29 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import GroupContainer from './groups/GroupContainer'
 import SuggestionContainer from './suggestions/SuggestionContainer'
 import { Grid } from 'semantic-ui-react'
 import { Redirect } from 'react-router-dom'
 import MyMapComponent from './map/MyMapComponent'
+import { selectGroup } from '../actions/currentGroup'
+import { loginOrSignup, signout } from '../actions/currentUser'
+import { updateCoordinates } from '../actions/currentCoords'
 
 class MainPage extends Component {
-  state = {
-    coordinates: '',
-    currentGroup: {}
-  }
-
-
   handleMiddleCoords = (coordinates) => {
-    if(coordinates !== this.state.coordinates){
-      this.setState({
-        coordinates
-      })
-    }
+    this.props.updateCoordinates(coordinates)
   }
 
   handleGroupChange = (currentGroup) => {
-    this.setState({
-      currentGroup
-    })
+    this.props.selectGroup(currentGroup)
   }
 
   displayMainPage = () => {
@@ -41,20 +33,21 @@ class MainPage extends Component {
         <Grid.Column className="ui container center aligned">
           <br />
           <h1>Google Map</h1>
-          <MyMapComponent
-            mapCoords={this.state.coordinates}
+          { this.props.currentGroup.name !== '' ?
+            <MyMapComponent
             googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyAIYICLeEdYXE_PCKhve_JNFWbqrNL3OD0&v=3.exp&libraries=geometry,drawing,places`}
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `600px`, width: `100%` }} />}
             mapElement={<div style={{ height: `100%` }} />}
-          />
+            />
+            : null
+          }
         </Grid.Column>
 
         <Grid.Column className="ui container center aligned">
           <br />
           <h1>Suggestions</h1>
           <SuggestionContainer
-            mapCoords={this.state.coordinates}
           />
         </Grid.Column>
 
@@ -70,7 +63,14 @@ class MainPage extends Component {
         </div>
     );
   }
-
 }
 
-export default MainPage;
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.currentUser,
+    currentGroup: state.currentGroup,
+    currentCoords: state.currentCoords
+  }
+}
+
+export default connect(mapStateToProps, { loginOrSignup, signout, selectGroup, updateCoordinates })(MainPage);

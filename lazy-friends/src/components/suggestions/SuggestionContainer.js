@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
 import SuggestionList from './SuggestionList'
 
 class SuggestionContainer extends Component {
@@ -13,4 +14,11 @@ class SuggestionContainer extends Component {
 
 }
 
-export default SuggestionContainer;
+const mapStateToProps = (state) => {
+  return {
+    currentGroup: state.currentGroup,
+    currentCoords: state.currentCoords
+  }
+}
+
+export default connect(mapStateToProps)(SuggestionContainer);

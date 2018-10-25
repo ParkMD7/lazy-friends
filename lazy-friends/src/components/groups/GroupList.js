@@ -1,5 +1,6 @@
 import React from 'react'
 import GroupMember from './GroupMember'
+import { connect } from 'react-redux';
 import { Card } from 'semantic-ui-react'
 
 class GroupList extends React.Component {
@@ -11,24 +12,19 @@ class GroupList extends React.Component {
     let totalLat = 0
     let totalLng = 0
     let middleCoords = ''
-    if(this.props.group.users){
-      if(this.props.group.users.length !== 0){
-        this.props.group.users.forEach( user => {
+    if(this.props.currentGroup.users){
+      if(this.props.currentGroup.users.length !== 0){
+        this.props.currentGroup.users.forEach( user => {
           const userLat = parseFloat(user.coordinates.split(',')[0])
           const userLng = parseFloat(user.coordinates.split(',')[1])
           totalLat += userLat
           totalLng += userLng
         })
-        const middleLat = (totalLat / this.props.group.users.length).toFixed(6)
-        const middleLng = (totalLng / this.props.group.users.length).toFixed(6)
+        const middleLat = (totalLat / this.props.currentGroup.users.length).toFixed(6)
+        const middleLng = (totalLng / this.props.currentGroup.users.length).toFixed(6)
         middleCoords = `${middleLat},${middleLng}`
         console.log(middleCoords);
-        // if (middleCoords !== this.state.middleCoords){
         this.props.coords(middleCoords)
-          // this.setState({
-          //   middleCoords
-          // })
-        // }
       }
     }
   }
@@ -38,7 +34,7 @@ class GroupList extends React.Component {
   }
 
   render() {
-    if(JSON.stringify(this.props.group) === JSON.stringify({}) || this.props.group === undefined){
+    if(JSON.stringify(this.props.currentGroup) === JSON.stringify({}) || this.props.currentGroup === undefined){
       return null
     }
     // this.findMiddleCoords()
@@ -46,12 +42,18 @@ class GroupList extends React.Component {
     return (
       <div className="ui container center aligned">
         <div>
-          <h1>Group: {this.props.group.name}</h1>
-          {this.props.group.users.map(groupUser => <GroupMember key={groupUser.id} {...groupUser} />)}
+          <h1>Group: {this.props.currentGroup.name}</h1>
+          {this.props.currentGroup.users.map(groupUser => <GroupMember key={groupUser.id} {...groupUser} />)}
         </div>
       </div>
     );
   }
 }
 
-export default GroupList;
+const mapStateToProps = (state) => {
+  return {
+    currentGroup: state.currentGroup
+  }
+}
+
+export default connect(mapStateToProps)(GroupList);
