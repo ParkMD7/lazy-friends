@@ -5,17 +5,15 @@ class GroupMember extends Component {
 
   render() {
     return (
-      <div className="ui container center aligned">
-        <Card fluid>
-          <div width='100%'>
-            <h2>{this.props.name}</h2>
+        <Card fluid textAlign='center' height='200px' width='150px'>
+          <div>
+            <h3>Name: {this.props.name}</h3>
             <div className="image">
-              <img src={this.props.profile_url} alt="oh no!" height='125px' width='125px'/>
+              <img src={this.props.profile_url} alt="oh no!" height='100px' width='100px'/>
             </div>
-            <h5>{this.props.location}</h5>
+            <h5>Location: {this.props.location}</h5>
           </div>
         </Card>
-      </div>
     );
   }
 

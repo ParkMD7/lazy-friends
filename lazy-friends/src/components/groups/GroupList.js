@@ -44,7 +44,7 @@ class GroupList extends React.Component {
     // this.findMiddleCoords()
 
     return (
-      <div className="ui container center aligned">
+      <div className="ui container center aligned" style={{overflowY: 'scroll', height: '645px'}}>
         <div>
           <h1>Group: {this.props.group.name}</h1>
           {this.props.group.users.map(groupUser => <GroupMember key={groupUser.id} {...groupUser} />)}

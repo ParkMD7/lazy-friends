@@ -29,7 +29,7 @@ class GroupContainer extends Component {
 
   render(){
     return (
-      <div className="ui container center aligned" style={{height: '600px'}}>
+      <div className="ui container center aligned" style={{height: '645px'}}>
         <Container fluid>
           <GroupDropdown
             groups={this.props.groups}
