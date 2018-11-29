@@ -30,7 +30,6 @@ const userReducer = (state=defaultState, action) => {
   switch (action.type) {
 
     case SET_CURRENT_USER:
-      debugger
       return { ...state, user: action.payload, loggedIn: true, authenticatingUser: false, userGroups: action.payload.groups }
 
     case AUTHENTICATING_USER: //tells the app we're fetching
