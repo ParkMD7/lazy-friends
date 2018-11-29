@@ -1,6 +1,11 @@
+// dependencies
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import { Icon } from 'semantic-ui-react'
+
+// user files
+
+
 
 class NavBar extends Component {
 
