@@ -5,9 +5,8 @@ export const loginOrSignup = user => {
   }
 }
 
-export const signout = user => {
+export const signout = () => {
   return {
-    type: 'SIGNOUT',
-    user
+    type: 'SIGNOUT'
   }
 }

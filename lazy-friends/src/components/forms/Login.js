@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-import { Container, Header, Input, Button } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { Link, withRouter, Redirect } from 'react-router-dom'
+import { Container, Header, Input, Button, Form } from 'semantic-ui-react'
+import { loginUser } from '../../actions/loginUser'
 
 class Login extends Component {
   state = {
@@ -14,11 +16,18 @@ class Login extends Component {
     })
   }
 
+  handleLogin = e => {
+    e.preventDefault()
+    this.props.loginUser(this.state.username, this.state.password)
+    this.setState({ username: '', password: '' })
+  }
+
   render() {
-    return (
+    return this.props.loggedIn ? (<Redirect to='/' />) :
+    (
       <Container text textAlign='center'>
         <Header>Lazy Friends</Header>
-        <form onSubmit={event => this.props.handleLogin(event, this.state)}>
+        <Form onSubmit={this.handleLogin}>
           <Header>Log In</Header>
           <Input size='large' fluid name='username' value={this.state.username} type='text' placeholder="Username" onChange={this.handleChange} /><br/>
           <Input size='large' fluid name='password' value={this.state.password} type='password' placeholder="Password" onChange={this.handleChange} /><br/>
@@ -28,11 +37,14 @@ class Login extends Component {
               <Link to='/signup'>Sign Up</Link>
             </Button>
           </Button.Group>
-        </form>
+        </Form>
       </Container>
     );
   }
-
 }
 
-export default Login;
+const mapStateToProps = ({ currentUser: { user, authenticatingUser, failedLogin, error, loggedIn }}) => {
+  return {user, authenticatingUser, failedLogin, error, loggedIn}
+}
+
+export default withRouter(connect(mapStateToProps, {loginUser})(Login));

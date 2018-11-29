@@ -2,12 +2,15 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import { Icon } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { signout } from '../actions/currentUser'
 
 // user files
 
 
 
 class NavBar extends Component {
+  handleSignOut = () => this.props.signout()
 
   render() {
     const link = {
@@ -25,11 +28,11 @@ class NavBar extends Component {
         <NavLink to='/profile' style={link}><Icon className="user" size='big' />Profile</NavLink>
         <NavLink to='/newgroup' style={link}><Icon className="add" size='big'/>New Group</NavLink>
         <NavLink to='/groups' style={link}><Icon className='group' size='big'/>Groups</NavLink>
-        <NavLink to='/signout' style={link} onClick={this.props.handleSignOut}><Icon className='sign out' size='big'/>Sign Out</NavLink>
+        <NavLink to='/login' style={link} onClick={this.handleSignOut}><Icon className='sign out' size='big'/>Sign Out</NavLink>
       </div>
     );
   }
 
 }
 
-export default NavBar;
+export default connect(null, { signout })(NavBar);
