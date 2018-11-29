@@ -8,6 +8,7 @@ import MyMapComponent from './map/MyMapComponent'
 import { selectGroup } from '../actions/currentGroup'
 import { loginOrSignup, signout } from '../actions/currentUser'
 import { updateCoordinates } from '../actions/currentCoords'
+import { config } from './config'
 
 class MainPage extends Component {
   handleMiddleCoords = (coordinates) => {
@@ -35,7 +36,7 @@ class MainPage extends Component {
           <h1>Google Map</h1>
           { this.props.currentGroup.name !== '' ?
             <MyMapComponent
-            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyAIYICLeEdYXE_PCKhve_JNFWbqrNL3OD0&v=3.exp&libraries=geometry,drawing,places`}
+            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${config.apiKey}&v=3.exp&libraries=geometry,drawing,places`}
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `600px`, width: `100%` }} />}
             mapElement={<div style={{ height: `100%` }} />}

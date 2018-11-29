@@ -5,11 +5,20 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'semantic-ui-css/semantic.min.css';
 import { Provider } from "react-redux";
-import {store} from "./store";
+import { createStore, applyMiddleware } from 'redux'
+import promise from 'redux-promise'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import thunk from 'redux-thunk'
+import { BrowserRouter } from 'react-router-dom'
+import reducers from './reducers'
+
+const createStoreWithMiddleware = createStore(reducers, composeWithDevTools(applyMiddleware(promise, thunk)))
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
+  <Provider store={createStoreWithMiddleware}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
