@@ -23,7 +23,6 @@ class Login extends Component {
   }
 
   render() {
-    debugger
     return this.props.loggedIn ? (<Redirect to='/' />) :
     (
       <Container text textAlign='center'>
