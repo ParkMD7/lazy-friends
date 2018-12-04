@@ -52,6 +52,7 @@ const userReducer = (state=defaultState, action) => {
       return defaultState
 
     case JOIN_GROUP:
+      debugger
       return { ...state, userGroups: [...state.userGroups, action.group] }
 
     case LEAVE_GROUP:

@@ -5,41 +5,18 @@ import { connect } from 'react-redux';
 
 // user files
 import { fetchGroups } from '../../actions/fetchGroups'
+import { joinGroup } from '../../actions/joinGroup'
 
 
 class Groups extends Component {
-  // state = {
-  //   currentGroup: {},
-  //   groups: []
-  // }
 
   componentDidMount() {
-    // fetch('http://localhost:3000/groups')
-    // .then(res => res.json())
-    // .then( groups => {
-    //   this.setState({groups: groups.groups, currentGroup: groups[0]})
-    // })
     this.props.fetchGroups()
-    debugger
   }
 
-  handleGroupJoin = group => {
-    fetch(`http://localhost:3000/groups/${group.id}`, {
-      method: 'PATCH',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        user: this.props.currentUser.id
-      })
-    }).then(res => res.json())
-    .then( groupObj => {
-      const groups = this.state.groups.filter( group => group.id !== groupObj.id)
-      this.setState({
-        groups
-      })
-    })
+  handleGroupJoin = (group) => {
+    const userID = this.props.currentUser.id.toString()
+    this.props.joinGroup(userID, group)
   }
 
   groupsToDisplay = (groups) => {
@@ -48,7 +25,6 @@ class Groups extends Component {
     }
     const groupsWithoutCurrentUser = groups.filter(group => {
       const userGroups = group.users.filter(user => {
-        debugger
         return user.id !== this.props.currentUser.id
       })
       if(userGroups.length === group.users.length){
@@ -74,8 +50,9 @@ class Groups extends Component {
 const mapStateToProps = (state) => {
   return {
     currentUser: state.currentUser.user,
-    allGroups: state.groupsReducer.groups
+    allGroups: state.groupsReducer.groups,
+    userGroups: state.currentUser.userGroups
   }
 }
 
-export default connect(mapStateToProps, { fetchGroups })(Groups);
+export default connect(mapStateToProps, { fetchGroups, joinGroup })(Groups);
