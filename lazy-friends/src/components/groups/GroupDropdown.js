@@ -1,12 +1,14 @@
 import React from 'react';
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
-const GroupDropdown = ({groups, handleGroupChange, currentGroup}) => {
+const GroupDropdown = ({currentUserGroups, handleGroupChange, currentGroup}) => {
+
   function formatGroupsForDropdown(){
-    return groups.map(group => ( {...group, text: group.name, value: group.id}))
+    return currentUserGroups.map(group => ( {...group, text: group.name, value: group.id}))
   }
 
-  if(groups.length === 0){
+  if(currentUserGroups.length === 0){
     return null
   }
 
@@ -15,4 +17,11 @@ const GroupDropdown = ({groups, handleGroupChange, currentGroup}) => {
    )
 };
 
-export default GroupDropdown;
+const mapStateToProps = (state) => {
+  return {
+    currentUserGroups: state.currentUser.userGroups
+  }
+}
+
+
+export default connect(mapStateToProps)(GroupDropdown);

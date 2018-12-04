@@ -12,7 +12,7 @@ class GroupContainer extends Component {
   }
 
   handleGroupChange = (event, semanticStuff) => {
-    const currentGroup = this.props.groups.find( group => group.id === semanticStuff.value)
+    const currentGroup = this.props.currentUserGroups.find( group => group.id === semanticStuff.value)
     this.props.groupChange(currentGroup)
   }
 
@@ -21,7 +21,7 @@ class GroupContainer extends Component {
       <div className="ui container center aligned" style={{height: '645px'}}>
         <Container fluid>
           <GroupDropdown
-            groups={this.props.groups}
+            // groups={this.props.currentUserGroups}
             handleGroupChange={this.handleGroupChange}
             currentGroup={this.props.currentGroup}
           />
@@ -39,7 +39,8 @@ class GroupContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentGroup: state.currentGroup
+    currentGroup: state.currentGroup,
+    currentUserGroups: state.currentUser.userGroups
   }
 }
 

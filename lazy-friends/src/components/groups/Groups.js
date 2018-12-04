@@ -1,18 +1,26 @@
+// dependencies
 import React, { Component } from 'react';
-import { Container } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+
+// user files
+import { fetchGroups } from '../../actions/fetchGroups'
+
 
 class Groups extends Component {
-  state = {
-    currentGroup: {},
-    groups: []
-  }
+  // state = {
+  //   currentGroup: {},
+  //   groups: []
+  // }
 
   componentDidMount() {
-    fetch('http://localhost:3000/groups')
-    .then(res => res.json())
-    .then( groups => {
-      this.setState({groups: groups.groups, currentGroup: groups[0]})
-    })
+    // fetch('http://localhost:3000/groups')
+    // .then(res => res.json())
+    // .then( groups => {
+    //   this.setState({groups: groups.groups, currentGroup: groups[0]})
+    // })
+    this.props.fetchGroups()
+    debugger
   }
 
   handleGroupJoin = group => {
@@ -34,12 +42,13 @@ class Groups extends Component {
     })
   }
 
-  groupsToDisplay = groups => {
-    if(groups.length === 0){
-      return null
+  groupsToDisplay = (groups) => {
+    if(!groups){
+      return <p>Loading Groups...</p>
     }
     const groupsWithoutCurrentUser = groups.filter(group => {
       const userGroups = group.users.filter(user => {
+        debugger
         return user.id !== this.props.currentUser.id
       })
       if(userGroups.length === group.users.length){
@@ -55,11 +64,18 @@ class Groups extends Component {
   render() {
     return (
       <Container fluid textAlign='center'>
-        {this.groupsToDisplay(this.state.groups)}
+        {this.groupsToDisplay(this.props.allGroups)}
       </Container>
     );
   }
 
 }
 
-export default Groups;
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.currentUser.user,
+    allGroups: state.groupsReducer.groups
+  }
+}
+
+export default connect(mapStateToProps, { fetchGroups })(Groups);

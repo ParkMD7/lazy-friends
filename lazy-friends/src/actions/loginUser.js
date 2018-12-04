@@ -21,6 +21,7 @@ export const loginUser = (username, password) => {
         if (response.ok) { //was the HTTP status code < 400
           return response.json()
         } else {
+          debugger
           throw response
         }
       })
@@ -31,7 +32,10 @@ export const loginUser = (username, password) => {
         // dispatch({ type: 'SET_CURRENT_USER', payload: JSONResponse.user })
         dispatch(setCurrentUser(JSONResponse.user))
       })
-      .catch(r => r.json().then(e => dispatch({ type: 'FAILED_LOGIN', payload: e.message })))
+      .catch(r =>
+        {console.log(r)
+        r.json().then(e => dispatch({ type: 'FAILED_LOGIN', payload: e.message }))}
+      )
   }
 }
 

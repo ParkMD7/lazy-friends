@@ -25,7 +25,7 @@ class MainPage extends Component {
 
         <Grid.Column className="ui container center aligned">
           <GroupContainer
-            groups={this.props.currentUser.groups}
+            // groups={this.props.currentUser.groups}
             coords={this.handleMiddleCoords}
             groupChange={this.handleGroupChange}
           />
@@ -68,7 +68,7 @@ class MainPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.currentUser,
+    currentUser: state.currentUser.user,
     currentGroup: state.currentGroup,
     currentCoords: state.currentCoords
   }
