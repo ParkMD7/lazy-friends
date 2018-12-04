@@ -1,21 +1,5 @@
-// export default (state = {
-//   id: 0,
-//   username: '',
-//   name: '',
-//   location: '',
-//   groups: []
-// }, action) => {
-//   switch (action.type) {
-//     case 'LOGIN_OR_SIGN_UP':
-//       return Object.assign({}, action.user)
-//     case 'SIGNOUT':
-//       return Object.assign({}, action.user)
-//     default:
-//       return state
-//   }
-// }
-
-import { SET_CURRENT_USER, AUTHENTICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, SIGNOUT, JOIN_GROUP, LEAVE_GROUP } from '../constants';
+// user files
+import { SET_CURRENT_USER, AUTHENTICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, SIGNOUT, JOIN_GROUP, LEAVE_GROUP, CREATE_GROUP } from '../constants';
 
 const defaultState = {
   user: null,
@@ -53,7 +37,11 @@ const userReducer = (state=defaultState, action) => {
 
     case JOIN_GROUP:
       debugger
-      return { ...state, userGroups: [...state.userGroups, action.group] }
+      return { ...state, userGroups: [...state.userGroups, { ...action.group, users: [...action.group.users, state.user] } ] }
+
+    case CREATE_GROUP:
+      debugger
+      return { ...state, userGroups: [...state.userGroups, { ...action.payload.data, users: [...action.payload.data.users, state.user] } ] }
 
     case LEAVE_GROUP:
       // console.log('%c GoalReducer Action : ', 'color: orange', action.group)

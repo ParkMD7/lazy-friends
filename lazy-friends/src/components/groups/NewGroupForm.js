@@ -1,5 +1,10 @@
+// dependencies
 import React, { Component } from 'react';
-import { Button, Form, Container } from 'semantic-ui-react'
+import { Button, Form, Container } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+
+// user files
+import { createNewGroup } from '../../actions/createNewGroup'
 
 class NewGroupForm extends Component {
   state = {
@@ -10,20 +15,22 @@ class NewGroupForm extends Component {
     this.setState({userInput: event.target.value})
   }
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault()
     const newGroupName = this.state.userInput
-    fetch('http://localhost:3000/groups', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: newGroupName,
-        user: 57
-      })
-    })
+    // fetch('http://localhost:3000/groups', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     name: newGroupName,
+    //     user: 57
+    //   })
+    // })
+      const userID = this.props.currentUser.id.toString()
+      this.props.createNewGroup(userID, newGroupName)
   }
 
   render() {
@@ -42,4 +49,11 @@ class NewGroupForm extends Component {
 
 }
 
-export default NewGroupForm;
+
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.currentUser.user
+  }
+}
+
+export default connect(mapStateToProps, { createNewGroup })(NewGroupForm);

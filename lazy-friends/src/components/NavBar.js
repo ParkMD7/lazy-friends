@@ -22,6 +22,14 @@ class NavBar extends Component {
       color: 'white',
     }
 
+    if(!this.props.user){
+      return (
+        <div className="App">
+          <NavLink to='/login' style={link}><Icon className='signup' size='big'/>Log In</NavLink>
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <NavLink to='/' style={link}><Icon className="home" size='big' />Home</NavLink>
@@ -35,4 +43,8 @@ class NavBar extends Component {
 
 }
 
-export default connect(null, { signout })(NavBar);
+const mapStateToProps = (state) => ({
+  user: state.currentUser.user
+})
+
+export default connect(mapStateToProps, { signout } )(NavBar);
