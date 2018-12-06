@@ -1,5 +1,5 @@
 // user files
-import { SET_CURRENT_USER, AUTHENTICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, SIGNOUT, JOIN_GROUP, LEAVE_GROUP, CREATE_GROUP } from '../constants';
+import { SET_CURRENT_USER, AUTHENTICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, SIGNOUT, JOIN_GROUP, LEAVE_GROUP, CREATE_GROUP, SELECT_GROUP } from '../constants';
 
 const defaultState = {
   user: null,
@@ -7,15 +7,18 @@ const defaultState = {
   authenticatingUser: false,
   failedLogin: false,
   error: null,
-  userGroups: []
+  userGroups: [],
+  currentGroup: {}
 }
 
 const userReducer = (state=defaultState, action) => {
   switch (action.type) {
 
     case SET_CURRENT_USER:
-    debugger
-      return { ...state, user: action.payload, loggedIn: true, authenticatingUser: false, userGroups: action.payload.groups }
+    // debugger
+      let currentGroup
+      action.payload.groups.length > 0 ? currentGroup = action.payload.groups[0] : currentGroup = {}
+      return { ...state, user: action.payload, loggedIn: true, authenticatingUser: false, userGroups: action.payload.groups, currentGroup }
 
     case AUTHENTICATING_USER: //tells the app we're fetching
       return { ...state, authenticatingUser: true }
@@ -35,12 +38,14 @@ const userReducer = (state=defaultState, action) => {
       localStorage.removeItem('jwt')
       return defaultState
 
+    case SELECT_GROUP:
+      return { ...state, currentGroup: action.group }
+
     case JOIN_GROUP:
-      debugger
+    debugger
       return { ...state, userGroups: [...state.userGroups, { ...action.group, users: [...action.group.users, state.user] } ] }
 
     case CREATE_GROUP:
-      debugger
       return { ...state, userGroups: [...state.userGroups, { ...action.payload.data, users: [...action.payload.data.users, state.user] } ] }
 
     case LEAVE_GROUP:

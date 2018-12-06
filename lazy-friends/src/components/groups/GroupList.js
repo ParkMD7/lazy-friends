@@ -4,34 +4,34 @@ import { connect } from 'react-redux';
 import { Card } from 'semantic-ui-react'
 
 class GroupList extends React.Component {
-  state = {
-    middleCoords: ''
-  }
+  // state = {
+  //   middleCoords: ''
+  // }
 
-  findMiddleCoords = () => {
-    let totalLat = 0
-    let totalLng = 0
-    let middleCoords = ''
-    if(this.props.currentGroup.users){
-      if(this.props.currentGroup.users.length !== 0){
-        this.props.currentGroup.users.forEach( user => {
-          const userLat = parseFloat(user.coordinates.split(',')[0])
-          const userLng = parseFloat(user.coordinates.split(',')[1])
-          totalLat += userLat
-          totalLng += userLng
-        })
-        const middleLat = (totalLat / this.props.currentGroup.users.length).toFixed(6)
-        const middleLng = (totalLng / this.props.currentGroup.users.length).toFixed(6)
-        middleCoords = `${middleLat},${middleLng}`
-        console.log(middleCoords);
-        this.props.coords(middleCoords)
-      }
-    }
-  }
+  // findMiddleCoords = () => {
+  //   let totalLat = 0
+  //   let totalLng = 0
+  //   let middleCoords = ''
+  //   if(this.props.currentGroup.users){
+  //     if(this.props.currentGroup.users.length !== 0){
+  //       this.props.currentGroup.users.forEach( user => {
+  //         const userLat = parseFloat(user.coordinates.split(',')[0])
+  //         const userLng = parseFloat(user.coordinates.split(',')[1])
+  //         totalLat += userLat
+  //         totalLng += userLng
+  //       })
+  //       const middleLat = (totalLat / this.props.currentGroup.users.length).toFixed(6)
+  //       const middleLng = (totalLng / this.props.currentGroup.users.length).toFixed(6)
+  //       middleCoords = `${middleLat},${middleLng}`
+  //       console.log(middleCoords);
+  //       this.props.coords(middleCoords)
+  //     }
+  //   }
+  // }
 
-  componentDidUpdate() {
-    this.findMiddleCoords()
-  }
+  // componentDidUpdate() {
+  //   this.findMiddleCoords()
+  // }
 
   render() {
     if(JSON.stringify(this.props.currentGroup) === JSON.stringify({}) || this.props.currentGroup === undefined){
@@ -52,7 +52,7 @@ class GroupList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentGroup: state.currentGroup
+    currentGroup: state.currentUser.currentGroup
   }
 }
 

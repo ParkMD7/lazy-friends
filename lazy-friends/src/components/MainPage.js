@@ -7,16 +7,48 @@ import { Redirect } from 'react-router-dom'
 import MyMapComponent from './map/MyMapComponent'
 import { selectGroup } from '../actions/currentGroup'
 import { loginOrSignup, signout } from '../actions/currentUser'
+import { fetchCurrentUser } from '../actions/loginUser'
 import { updateCoordinates } from '../actions/currentCoords'
 import { config } from './config'
 
 class MainPage extends Component {
+  componentDidMount(){
+    debugger
+    if(!!localStorage.getItem('jwt')){
+      this.props.fetchCurrentUser()
+    }
+  }
+
   handleMiddleCoords = (coordinates) => {
     this.props.updateCoordinates(coordinates)
   }
 
-  handleGroupChange = (currentGroup) => {
-    this.props.selectGroup(currentGroup)
+  // handleGroupChange = (currentGroup) => {
+  //   this.props.selectGroup(currentGroup)
+  // }
+
+  findMiddleCoords = () => {
+    let totalLat = 0
+    let totalLng = 0
+    let middleCoords = ''
+    if(this.props.currentGroup.users){
+      if(this.props.currentGroup.users.length !== 0){
+        this.props.currentGroup.users.forEach( user => {
+          const userLat = parseFloat(user.coordinates.split(',')[0])
+          const userLng = parseFloat(user.coordinates.split(',')[1])
+          totalLat += userLat
+          totalLng += userLng
+        })
+        const middleLat = (totalLat / this.props.currentGroup.users.length).toFixed(6)
+        const middleLng = (totalLng / this.props.currentGroup.users.length).toFixed(6)
+        middleCoords = `${middleLat},${middleLng}`
+        console.log(middleCoords);
+        // this.props.coords(middleCoords)
+        if(this.props.currentCoords !== middleCoords ){
+          this.props.updateCoordinates(middleCoords)
+        }
+      }
+    }
   }
 
   displayMainPage = () => {
@@ -26,8 +58,8 @@ class MainPage extends Component {
         <Grid.Column className="ui container center aligned">
           <GroupContainer
             // groups={this.props.currentUser.groups}
-            coords={this.handleMiddleCoords}
-            groupChange={this.handleGroupChange}
+            // // coords={this.handleMiddleCoords}
+            // groupChange={this.handleGroupChange}
           />
         </Grid.Column>
 
@@ -57,9 +89,11 @@ class MainPage extends Component {
   }
 
   render() {
+    debugger
+    this.findMiddleCoords()
     return (
         <div>
-          { this.props.currentUser.username === '' ?
+          { !this.props.currentUser ?
           <Redirect to='/login' /> : this.displayMainPage() }
         </div>
     );
@@ -69,9 +103,10 @@ class MainPage extends Component {
 const mapStateToProps = (state) => {
   return {
     currentUser: state.currentUser.user,
-    currentGroup: state.currentGroup,
-    currentCoords: state.currentCoords
+    currentGroup: state.currentUser.currentGroup,
+    currentCoords: state.currentCoords,
+    currentUserGroups: state.currentUser.userGroups
   }
 }
 
-export default connect(mapStateToProps, { loginOrSignup, signout, selectGroup, updateCoordinates })(MainPage);
+export default connect(mapStateToProps, { loginOrSignup, signout, selectGroup, updateCoordinates, fetchCurrentUser })(MainPage);

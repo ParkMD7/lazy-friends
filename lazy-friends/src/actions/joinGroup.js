@@ -8,6 +8,7 @@ export const joinGroup = (userID, group) => {
   const request = axios.patch(`${ROOT_URL}/groups/${group.id}`, {
       user: userID
   })
+  debugger
   return {
     type: JOIN_GROUP,
     payload: request,

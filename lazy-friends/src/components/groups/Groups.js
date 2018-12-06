@@ -1,7 +1,8 @@
 // dependencies
 import React, { Component } from 'react';
-import { Container } from 'semantic-ui-react';
+import { Container, Header } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 // user files
 import { fetchGroups } from '../../actions/fetchGroups'
@@ -17,6 +18,9 @@ class Groups extends Component {
   handleGroupJoin = (group) => {
     const userID = this.props.currentUser.id.toString()
     this.props.joinGroup(userID, group)
+    this.props.history.push({
+      pathname: '/'
+    })
   }
 
   groupsToDisplay = (groups) => {
@@ -33,11 +37,12 @@ class Groups extends Component {
     })
 
     return groupsWithoutCurrentUser.map( group => {
-      return <p key={group.id} onClick={() => this.handleGroupJoin(group)}> {group.name} </p>
+      return <Header key={group.id} onClick={() => this.handleGroupJoin(group)}> {group.name} </Header>
     })
   }
 
   render() {
+    console.log(this.props)
     return (
       <Container fluid textAlign='center'>
         {this.groupsToDisplay(this.props.allGroups)}
@@ -47,7 +52,7 @@ class Groups extends Component {
 
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     currentUser: state.currentUser.user,
     allGroups: state.groupsReducer.groups,
@@ -55,4 +60,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchGroups, joinGroup })(Groups);
+export default withRouter(connect(mapStateToProps, { fetchGroups, joinGroup })(Groups));

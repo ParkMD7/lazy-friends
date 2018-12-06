@@ -3,7 +3,7 @@ import GroupList from './GroupList'
 import GroupDropdown from './GroupDropdown'
 // import {groups} from './group'
 import { Container } from 'semantic-ui-react'
-import { selectGroup } from '../../actions/currentGroup'
+// import { selectGroup } from '../../actions/currentGroup'
 import { connect } from 'react-redux';
 
 class GroupContainer extends Component {
@@ -11,18 +11,18 @@ class GroupContainer extends Component {
     return this.props.currentGroup
   }
 
-  handleGroupChange = (event, semanticStuff) => {
-    const currentGroup = this.props.currentUserGroups.find( group => group.id === semanticStuff.value)
-    this.props.groupChange(currentGroup)
-  }
+  // handleGroupChange = (event, semanticStuff) => {
+  //   const currentGroup = this.props.currentUserGroups.find( group => group.id === semanticStuff.value)
+  //   this.props.groupChange(currentGroup)
+  // }
 
   render(){
     return (
       <div className="ui container center aligned" style={{height: '645px'}}>
         <Container fluid>
           <GroupDropdown
-            // groups={this.props.currentUserGroups}
-            handleGroupChange={this.handleGroupChange}
+            // // groups={this.props.currentUserGroups}
+            // handleGroupChange={this.handleGroupChange}
             currentGroup={this.props.currentGroup}
           />
 
@@ -39,9 +39,9 @@ class GroupContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentGroup: state.currentGroup,
+    currentGroup: state.currentUser.currentGroup,
     currentUserGroups: state.currentUser.userGroups
   }
 }
 
-export default connect(mapStateToProps, { selectGroup })(GroupContainer);
+export default connect(mapStateToProps)(GroupContainer);

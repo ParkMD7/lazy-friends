@@ -1,10 +1,16 @@
 import React from 'react';
 import { Dropdown } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import { selectGroup } from '../../actions/currentGroup'
 
-const GroupDropdown = ({currentUserGroups, handleGroupChange, currentGroup}) => {
+const GroupDropdown = ({currentUserGroups, selectGroup, currentGroup}) => {
 
-  function formatGroupsForDropdown(){
+  const handleGroupChange = (event, semanticStuff) => {
+    const selectedGroup = currentUserGroups.find( group => group.id === semanticStuff.value)
+    selectGroup(selectedGroup)
+  }
+
+  const formatGroupsForDropdown = () => {
     return currentUserGroups.map(group => ( {...group, text: group.name, value: group.id}))
   }
 
@@ -17,11 +23,20 @@ const GroupDropdown = ({currentUserGroups, handleGroupChange, currentGroup}) => 
    )
 };
 
+// const mapStateToProps = (state) => {
+//   debugger
+//   return {
+//     currentUserGroups: state.currentUser.userGroups
+//   }
+// }
+
 const mapStateToProps = (state) => {
+  debugger
   return {
+    currentGroup: state.currentUser.currentGroup,
     currentUserGroups: state.currentUser.userGroups
   }
 }
 
 
-export default connect(mapStateToProps)(GroupDropdown);
+export default connect(mapStateToProps, { selectGroup })(GroupDropdown);
