@@ -26,7 +26,7 @@ class App extends Component {
         <React.Fragment>
           <br />
           <NavBarContainer />
-          <br /><br /><br /><br /><br /><br />
+          <br /><br /><br /><br />
           <Switch>
             <Route exact path="/" component={ () => <MainPage /> } />
             <Route exact path='/profile' render={ () => <h1>Profile</h1>} />

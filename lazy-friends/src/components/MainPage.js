@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GroupContainer from './groups/GroupContainer'
 import SuggestionContainer from './suggestions/SuggestionContainer'
+import GroupDropdown from './groups/GroupDropdown'
 import { Grid } from 'semantic-ui-react'
 import { Redirect } from 'react-router-dom'
 import MyMapComponent from './map/MyMapComponent'
@@ -44,35 +45,39 @@ class MainPage extends Component {
 
   displayMainPage = () => {
     return (
-      <Grid container columns={3}>
+      <Grid centered>
+        <Grid.Row columns={1} centered style={{height: '25px'}}>
+          <Grid.Column width={6} textAlign='center'>
+            <GroupDropdown />
+          </Grid.Column>
+        </Grid.Row>
 
-        <Grid.Column className="ui container center aligned">
-          <GroupContainer />
-        </Grid.Column>
+        <br /><br /><br /><br />
+        <Grid.Row columns={3} centered>
+          <Grid.Column className="ui container center aligned">
+            <GroupContainer />
+          </Grid.Column>
 
-        <Grid.Column className="ui container center aligned">
-          <br />
-          <h1>Google Map</h1>
-          { this.props.currentGroup.name !== '' ?
-            <MyMapComponent
-              googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${config.apiKey}&v=3.exp&libraries=geometry,drawing,places`}
-              loadingElement={<div style={{ height: `100%` }} />}
-              containerElement={<div style={{ height: `600px`, width: `100%` }} />}
-              mapElement={<div style={{ height: `100%` }} />}
-            />
-          : null
-          }
-        </Grid.Column>
+          <Grid.Column className="ui container center aligned">
+            { this.props.currentGroup.name !== '' ?
+              <MyMapComponent
+                googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${config.apiKey}&v=3.exp&libraries=geometry,drawing,places`}
+                loadingElement={<div style={{ height: `100%` }} />}
+                containerElement={<div style={{ height: `550px`, width: `100%` }} />}
+                mapElement={<div style={{ height: `100%` }} />}
+              />
+            : null
+            }
+          </Grid.Column>
 
-        <Grid.Column className="ui container center aligned">
-          <br />
-          <h1>Suggestions</h1>
-          <SuggestionContainer />
-        </Grid.Column>
-
+          <Grid.Column className="ui container center aligned">
+            {/* <h1>Suggestions</h1> */}
+            <SuggestionContainer />
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
-    )
-  }
+        )
+        }
 
   render() {
     this.findMiddleCoords()

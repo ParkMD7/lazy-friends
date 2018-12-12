@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Button, Form, Container } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 // user files
 import { createNewGroup } from '../../actions/createNewGroup'
@@ -18,19 +19,11 @@ class NewGroupForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     const newGroupName = this.state.userInput
-    // fetch('http://localhost:3000/groups', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     name: newGroupName,
-    //     user: 57
-    //   })
-    // })
       const userID = this.props.currentUser.id.toString()
       this.props.createNewGroup(userID, newGroupName)
+      this.props.history.push({
+        pathname: '/'
+      })
   }
 
   render() {
@@ -56,4 +49,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { createNewGroup })(NewGroupForm);
+export default withRouter(connect(mapStateToProps, { createNewGroup })(NewGroupForm));

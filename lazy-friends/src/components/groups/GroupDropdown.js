@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown } from 'semantic-ui-react';
+import { Dropdown, Header } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { selectGroup } from '../../actions/currentGroup'
 
@@ -14,13 +14,10 @@ const GroupDropdown = ({currentUserGroups, selectGroup, currentGroup}) => {
     return currentUserGroups.map(group => ( {...group, text: group.name, value: group.id}))
   }
 
-  if(currentUserGroups.length === 0){
-    return <Dropdown onChange={(event) => event.preventDefault()} text={'Please Join A Group To See The Middle Point'} fluid selection />
-  }
-
-  return(
-     <Dropdown onChange={handleGroupChange} text={currentGroup.name} fluid selection options={formatGroupsForDropdown()} />
-   )
+  return currentUserGroups.length === 0 ?
+    <Dropdown style={{height: '10px', fontSize: '20px'}} onChange={(event) => event.preventDefault()} text={'Please Join A Group To See The Middle Point'} fluid selection />
+      :
+    <Dropdown style={{height: '10px', fontSize: '20px'}} onChange={handleGroupChange} text={currentGroup.name} fluid selection options={formatGroupsForDropdown()}/>
 };
 
 const mapStateToProps = (state) => {
