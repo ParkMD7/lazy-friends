@@ -10,13 +10,16 @@ import NewGroupForm from './components/groups/NewGroupForm'
 import Login from './components/forms/Login'
 import SignUp from './components/forms/SignUp'
 import Groups from './components/groups/Groups'
-import { config } from './components/config'
-import { loginOrSignup, signout } from './actions/currentUser'
-import { selectGroup } from './actions/currentGroup'
+import { fetchCurrentUser } from './actions/loginUser'
 import './App.css';
 
 
 class App extends Component {
+  componentDidMount(){
+    if(!!localStorage.getItem('jwt')){
+      this.props.fetchCurrentUser()
+    }
+  }
 
   render() {
     return (
@@ -37,4 +40,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App)
+export default withRouter(connect(null, { fetchCurrentUser })(App))

@@ -12,12 +12,11 @@ import { updateCoordinates } from '../actions/currentCoords'
 import { config } from './config'
 
 class MainPage extends Component {
-  componentDidMount(){
-    debugger
-    if(!!localStorage.getItem('jwt')){
-      this.props.fetchCurrentUser()
-    }
-  }
+  // componentDidMount(){
+  //   if(!!localStorage.getItem('jwt')){
+  //     this.props.fetchCurrentUser()
+  //   }
+  // }
 
   handleMiddleCoords = (coordinates) => {
     this.props.updateCoordinates(coordinates)

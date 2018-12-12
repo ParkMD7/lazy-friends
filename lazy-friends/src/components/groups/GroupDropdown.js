@@ -23,13 +23,6 @@ const GroupDropdown = ({currentUserGroups, selectGroup, currentGroup}) => {
    )
 };
 
-// const mapStateToProps = (state) => {
-//   debugger
-//   return {
-//     currentUserGroups: state.currentUser.userGroups
-//   }
-// }
-
 const mapStateToProps = (state) => {
   debugger
   return {
