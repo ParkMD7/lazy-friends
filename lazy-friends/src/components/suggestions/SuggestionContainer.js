@@ -6,7 +6,7 @@ class SuggestionContainer extends Component {
 
   render() {
     return (
-      <div className="ui container center aligned" style={{overflowY: 'scroll', height: '600px'}}>
+      <div className="ui container center aligned" style={{overflowY: 'scroll', height: '550px'}}>
         <SuggestionList />
       </div>
     );

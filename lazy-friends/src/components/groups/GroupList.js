@@ -4,16 +4,16 @@ import { connect } from 'react-redux';
 import { Card } from 'semantic-ui-react'
 
 class GroupList extends React.Component {
-  
+
   render() {
     if(JSON.stringify(this.props.currentGroup) === JSON.stringify({}) || this.props.currentGroup === undefined){
       return null
     }
 
     return (
-      <div className="ui container center aligned" style={{overflowY: 'scroll', height: '645px'}}>
+      <div className="ui container center aligned" style={{overflowY: 'scroll', height: '550px'}}>
         <div>
-          <h1>Group: {this.props.currentGroup.name}</h1>
+          {/* <h1>Group: {this.props.currentGroup.name}</h1> */}
           {this.props.currentGroup.users.map(groupUser => <GroupMember key={groupUser.id} {...groupUser} />)}
         </div>
       </div>
