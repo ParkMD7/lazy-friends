@@ -45,7 +45,8 @@ const userReducer = (state=defaultState, action) => {
       return { ...state, userGroups: [...state.userGroups, { ...action.group, users: [...action.group.users, state.user] } ], currentGroup: action.group }
 
     case CREATE_GROUP:
-      return { ...state, userGroups: [...state.userGroups, { ...action.payload.data, users: [...action.payload.data.users, state.user] } ] }
+      return { ...state, userGroups: [...state.userGroups, { ...action.payload.data } ], currentGroup: action.payload.data }
+      // return { ...state, userGroups: [...state.userGroups, { ...action.payload.data, users: [...action.payload.data.users, state.user] } ] }
 
     case LEAVE_GROUP:
       // console.log('%c GoalReducer Action : ', 'color: orange', action.group)
