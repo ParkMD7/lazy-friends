@@ -11,20 +11,20 @@ class SuggestionList extends React.Component {
   //   this.getSuggestions()
   // }
 
-  // checkResults = (results) => {
-  //   let isEqual = true
-  //
-  //   if(this.state.suggestions.length === 0){
-  //     return false
-  //   }
-  //
-  //   results.forEach( (result, index) => {
-  //     if(result.id !== this.state.suggestions[index].id){
-  //       isEqual = false
-  //     }
-  //   })
-  //   return isEqual
-  // }
+  checkResults = (results) => {
+    let isEqual = true
+
+    if(this.state.suggestions.length === 0){
+      return false
+    }
+
+    results.forEach( (result, index) => {
+      if(result.id !== this.state.suggestions[index].id){
+        isEqual = false
+      }
+    })
+    return isEqual
+  }
 
   getSuggestions = () => {
     let results
@@ -43,11 +43,11 @@ class SuggestionList extends React.Component {
       .then(response => response.json())
       .then(googleData => {
         if(googleData.status === 'OK'){
-          // if(!(this.checkResults(googleData.results))){
+          if(!(this.checkResults(googleData.results))){
             this.setState({
               suggestions: googleData.results
             })
-          // }
+          }
         }
       })
       .catch((error) => {

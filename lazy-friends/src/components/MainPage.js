@@ -13,7 +13,7 @@ import { updateCoordinates } from '../actions/currentCoords'
 import { config } from './config'
 
 class MainPage extends Component {
-  
+
 
   handleMiddleCoords = (coordinates) => {
     this.props.updateCoordinates(coordinates)
@@ -34,8 +34,6 @@ class MainPage extends Component {
         const middleLat = (totalLat / this.props.currentGroup.users.length).toFixed(6)
         const middleLng = (totalLng / this.props.currentGroup.users.length).toFixed(6)
         middleCoords = `${middleLat},${middleLng}`
-        console.log(middleCoords);
-        // this.props.coords(middleCoords)
         if(this.props.currentCoords !== middleCoords ){
           this.props.updateCoordinates(middleCoords)
         }
