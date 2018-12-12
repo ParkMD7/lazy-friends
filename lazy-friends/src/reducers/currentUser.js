@@ -42,8 +42,7 @@ const userReducer = (state=defaultState, action) => {
       return { ...state, currentGroup: action.group }
 
     case JOIN_GROUP:
-    debugger
-      return { ...state, userGroups: [...state.userGroups, { ...action.group, users: [...action.group.users, state.user] } ] }
+      return { ...state, userGroups: [...state.userGroups, { ...action.group, users: [...action.group.users, state.user] } ], currentGroup: action.group }
 
     case CREATE_GROUP:
       return { ...state, userGroups: [...state.userGroups, { ...action.payload.data, users: [...action.payload.data.users, state.user] } ] }
