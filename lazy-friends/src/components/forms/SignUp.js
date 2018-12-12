@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Container, Header, Input, Button, Label } from 'semantic-ui-react'
+import { Container, Header, Input, Button, Label, Form } from 'semantic-ui-react'
+import { signUpUser } from '../../actions/loginUser'
+import { config } from '../config'
 
 class SignUp extends Component {
   state = {
@@ -9,7 +11,8 @@ class SignUp extends Component {
     email: '',
     password: '',
     name: '',
-    location: ''
+    location: '',
+    profile_url: ''
   }
 
   handleChange = event => {
@@ -18,46 +21,69 @@ class SignUp extends Component {
     })
   }
 
+  formatAddress = address => {
+    return address.replace(/ /g, '+')
+  }
+
+  convertAddressToLatLong = address => {
+    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${config.apiKey}`).then(res => res.json())
+  }
+
+  handleSubmit = (event, formData) => {
+    const formattedAddress = this.formatAddress(formData.location)
+    debugger
+    let latLong = ''
+    this.convertAddressToLatLong(formattedAddress).then( addressObj => {
+      latLong = `${addressObj.results[0].geometry.location.lat},${addressObj.results[0].geometry.location.lng}`
+    }).then( () => {
+      const newUser = { ...formData, coordinates: latLong }
+      this.props.signUpUser(newUser)
+      this.setState({
+        username: '',
+        email: '',
+        password: '',
+        name: '',
+        location: '',
+        profile_url: ''
+      })
+    })
+  }
+
   render() {
     return (
       <Container text textAlign='center'>
       <Header>Lazy Friends</Header>
-        <form onSubmit={event => this.props.handleSubmit(event, this.state)}>
+        <Form onSubmit={event => this.handleSubmit(event, this.state)}>
           <Header>Sign Up</Header>
           <Container textAlign='left'>
-            <Label>Name *</Label>
-            <Input size='large' fluid name='name' value={this.state.name} type='text' placeholder="Name" onChange={this.handleChange} />
+            <Input size='large' fluid name='name' value={this.state.name} type='text' placeholder="Name" onChange={this.handleChange} /><br />
           </Container>
           <Container textAlign='left'>
-            <Label>Email *</Label>
-            <Input size='large' fluid name='email' value={this.state.email} type='text' placeholder="Email" onChange={this.handleChange} />
+            <Input size='large' fluid name='email' value={this.state.email} type='text' placeholder="Email" onChange={this.handleChange} /><br />
           </Container>
           <Container textAlign='left'>
-            <Label>Home Location *</Label>
-            <Input size='large' fluid name='location' value={this.state.location} type='text' placeholder="Location" onChange={this.handleChange} />
+            <Input size='large' fluid name='location' value={this.state.location} type='text' placeholder="Location" onChange={this.handleChange} /><br />
           </Container>
           <Container textAlign='left'>
-            <Label>Username *</Label>
-            <Input size='large' fluid name='username' value={this.state.username} type='text' placeholder="Username" onChange={this.handleChange} />
+            <Input size='large' fluid name='username' value={this.state.username} type='text' placeholder="Username" onChange={this.handleChange} /><br />
           </Container>
           <Container textAlign='left'>
-            <Label>Password (6 characters minimum)</Label>
-            <Input size='large' fluid name='password' value={this.state.password} type='password' placeholder="Password" onChange={this.handleChange} /><br/><br/>
+            <Input size='large' fluid name='password' value={this.state.password} type='password' placeholder="Password" onChange={this.handleChange} /><br/>
+          </Container>
+          <Container textAlign='left'>
+            <Input size='large' fluid name='profile_url' value={this.state.profile_url} type='text' placeholder="Profile Picture URL" onChange={this.handleChange} /><br/>
           </Container>
           <Button.Group fluid>
             <Button basic color='blue' type='submit'>Sign Up</Button>
-            <Button basic color='blue'>
-              <Link to='/login'>Log In</Link>
-            </Button>
           </Button.Group>
-        </form>
+        </Form>
       </Container>
     );
   }
 
 }
 
-export default SignUp;
+export default connect(null, { signUpUser })(SignUp);
 
 // formatAddress = address => {
 //   return address.replace(/ /g, '+')

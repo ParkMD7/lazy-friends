@@ -39,7 +39,7 @@ export const loginUser = (username, password) => {
   }
 }
 
-export const signUpUser = (name, age, username, email, password, location, picture) => {
+export const signUpUser = ({ name, username, email, password, location, coordinates, profile_url }) => {
   return (dispatch) => {
     // dispatch({ type: 'AUTHENTICATING_USER' })
     dispatch(authenticatingUser())
@@ -51,13 +51,13 @@ export const signUpUser = (name, age, username, email, password, location, pictu
       },
       body: JSON.stringify({
         user: {
-          name: name,
-          age: age,
-          username: username,
-          email: email,
-          password: password,
-          location: location,
-          picture: picture
+          name,
+          username,
+          email,
+          password,
+          location,
+          profile_url,
+          coordinates
         }
       })
     })
