@@ -14,10 +14,20 @@ import reducers from './reducers'
 
 const createStoreWithMiddleware = createStore(reducers, composeWithDevTools(applyMiddleware(promise, thunk)))
 
+const background = require('./images/background.jpg')
+const sectionStyle = {
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'noRepeat',
+    backgroundImage: 'url(' + background + ')'
+};
+
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware}>
     <BrowserRouter>
-      <App />
+      <div style={ sectionStyle }>
+        <App />
+      </div>
     </BrowserRouter>
   </Provider>, document.getElementById('root'));
 
