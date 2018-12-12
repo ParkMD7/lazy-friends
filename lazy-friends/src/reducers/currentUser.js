@@ -15,7 +15,6 @@ const userReducer = (state=defaultState, action) => {
   switch (action.type) {
 
     case SET_CURRENT_USER:
-      debugger
       let currentGroup
       action.payload.groups.length > 0 ? currentGroup = action.payload.groups[0] : currentGroup = {}
       return { ...state, user: action.payload, loggedIn: true, authenticatingUser: false, userGroups: action.payload.groups, currentGroup }

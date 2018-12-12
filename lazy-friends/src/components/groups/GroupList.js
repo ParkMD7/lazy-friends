@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Card } from 'semantic-ui-react'
 
 class GroupList extends React.Component {
+  
   render() {
     if(JSON.stringify(this.props.currentGroup) === JSON.stringify({}) || this.props.currentGroup === undefined){
       return null

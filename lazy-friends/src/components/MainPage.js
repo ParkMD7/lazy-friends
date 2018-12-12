@@ -12,19 +12,11 @@ import { updateCoordinates } from '../actions/currentCoords'
 import { config } from './config'
 
 class MainPage extends Component {
-  // componentDidMount(){
-  //   if(!!localStorage.getItem('jwt')){
-  //     this.props.fetchCurrentUser()
-  //   }
-  // }
+
 
   handleMiddleCoords = (coordinates) => {
     this.props.updateCoordinates(coordinates)
   }
-
-  // handleGroupChange = (currentGroup) => {
-  //   this.props.selectGroup(currentGroup)
-  // }
 
   findMiddleCoords = () => {
     let totalLat = 0
@@ -55,11 +47,7 @@ class MainPage extends Component {
       <Grid container columns={3}>
 
         <Grid.Column className="ui container center aligned">
-          <GroupContainer
-            // groups={this.props.currentUser.groups}
-            // // coords={this.handleMiddleCoords}
-            // groupChange={this.handleGroupChange}
-          />
+          <GroupContainer />
         </Grid.Column>
 
         <Grid.Column className="ui container center aligned">
@@ -79,8 +67,7 @@ class MainPage extends Component {
         <Grid.Column className="ui container center aligned">
           <br />
           <h1>Suggestions</h1>
-          <SuggestionContainer
-          />
+          <SuggestionContainer />
         </Grid.Column>
 
       </Grid>
@@ -88,7 +75,6 @@ class MainPage extends Component {
   }
 
   render() {
-    debugger
     this.findMiddleCoords()
     return (
         <div>

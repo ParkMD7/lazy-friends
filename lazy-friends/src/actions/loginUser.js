@@ -21,7 +21,6 @@ export const loginUser = (username, password) => {
         if (response.ok) { //was the HTTP status code < 400
           return response.json()
         } else {
-          debugger
           throw response
         }
       })

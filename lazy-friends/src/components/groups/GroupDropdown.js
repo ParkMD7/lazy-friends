@@ -15,7 +15,7 @@ const GroupDropdown = ({currentUserGroups, selectGroup, currentGroup}) => {
   }
 
   if(currentUserGroups.length === 0){
-    return null
+    return <Dropdown onChange={(event) => event.preventDefault()} text={'Please Join A Group To See The Middle Point'} fluid selection />
   }
 
   return(
@@ -24,7 +24,6 @@ const GroupDropdown = ({currentUserGroups, selectGroup, currentGroup}) => {
 };
 
 const mapStateToProps = (state) => {
-  debugger
   return {
     currentGroup: state.currentUser.currentGroup,
     currentUserGroups: state.currentUser.userGroups
