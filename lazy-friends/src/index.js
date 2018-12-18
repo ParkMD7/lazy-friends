@@ -19,7 +19,8 @@ const sectionStyle = {
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'noRepeat',
-    backgroundImage: 'url(' + background + ')'
+    backgroundImage: 'url(' + background + ')',
+    height: '1500px'
 };
 
 ReactDOM.render(

@@ -4,12 +4,13 @@ import axios from "axios"; // handles network requests & redux-promise on Index.
 import { ROOT_URL, CREATE_GROUP } from '../constants';
 
 
-export const createNewGroup = (userID, newGroupName, suggestion) => {
+export const createNewGroup = (userID, newGroupName, suggestion, description) => {
   const request = axios.post(`${ROOT_URL}/groups`, {
       group: {
         name: newGroupName,
         user_id: userID,
-        suggestions: suggestion
+        suggestions: suggestion,
+        description
       }
   })
   return {
