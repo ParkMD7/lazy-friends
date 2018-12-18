@@ -13,7 +13,6 @@ class GroupList extends React.Component {
     return (
       <div className="ui container center aligned" style={{overflowY: 'scroll', height: '550px'}}>
         <div>
-          {/* <h1>Group: {this.props.currentGroup.name}</h1> */}
           {this.props.currentGroup.users.map(groupUser => <GroupMember key={groupUser.id} {...groupUser} />)}
         </div>
       </div>

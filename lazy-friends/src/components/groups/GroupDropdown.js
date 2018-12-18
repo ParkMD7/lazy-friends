@@ -11,7 +11,7 @@ const GroupDropdown = ({currentUserGroups, selectGroup, currentGroup}) => {
   }
 
   const formatGroupsForDropdown = () => {
-    return currentUserGroups.map(group => ( {...group, text: group.name, value: group.id}))
+    return currentUserGroups.map(group => ({...group, text: group.name, value: group.id}))
   }
 
   return currentUserGroups.length === 0 ?
