@@ -1,6 +1,6 @@
 // dependencies
 import React, { Component } from 'react';
-import { Container, Header } from 'semantic-ui-react';
+import { Container, Header, Card, Feed, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -27,6 +27,7 @@ class Groups extends Component {
     if(!groups){
       return <p>Loading Groups...</p>
     }
+
     const groupsWithoutCurrentUser = groups.filter(group => {
       const userGroups = group.users.filter(user => {
         return user.id !== this.props.currentUser.id
@@ -37,16 +38,56 @@ class Groups extends Component {
     })
 
     return groupsWithoutCurrentUser.map( group => {
-      return <Header key={group.id} onClick={() => this.handleGroupJoin(group)}> {group.name} </Header>
+      // debugger
+      // return <Header key={group.id} onClick={() => this.handleGroupJoin(group)}> {group.name} </Header>
+      return(
+        <Card centered style={{width:'400px', opacity:'0.9'}}>
+          <Card.Content>
+            <Header>Name: {group.name}</Header>
+            <Feed.Date content=<span>Updated: {group.updated_at.toString()}</span> />
+          </Card.Content>
+          <Card.Content>
+            <h5>Current Members:</h5>
+            <div style={{overflowY: 'scroll', height: '75px'}}>
+              {group.users.map(user => {
+                return(
+                  <Feed key={user.id}>
+                    <Feed.Event>
+                      <Feed.Label image={user.profile_url} />
+                      <Feed.Content>
+                        <Feed.Summary>
+                          <a>{user.name}</a> joined <a>{group.name}</a>
+                        </Feed.Summary>
+                      </Feed.Content>
+                    </Feed.Event>
+                  </Feed>
+                )
+              })}
+            </div>
+          </Card.Content>
+          <Card.Content extra>
+            <Button fluid basic color='green' onClick={() => this.handleGroupJoin(group)}>
+              Join Group
+            </Button>
+          </Card.Content>
+        </Card>
+      )
     })
   }
 
   render() {
     console.log(this.props)
     return (
-      <Container fluid textAlign='center'>
-        {this.groupsToDisplay(this.props.allGroups)}
-      </Container>
+      <div>
+        <br/>
+        <Container centered className="ui container center aligned"><h1 style={{color: 'white'}}>Groups To Join:</h1></Container>
+        <br/>
+        <Container centered className="ui container center aligned" style={{overflowY: 'scroll', height: '600px'}}>
+          <Card.Group centered itemsPerRow={2}>
+            {this.groupsToDisplay(this.props.allGroups)}
+          </Card.Group>
+        </Container>
+      </div>
     );
   }
 
