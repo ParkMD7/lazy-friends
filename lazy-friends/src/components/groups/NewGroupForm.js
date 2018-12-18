@@ -9,7 +9,7 @@ import { createNewGroup } from '../../actions/createNewGroup'
 import { suggestions } from '../../constants/suggestions'
 
 class NewGroupForm extends Component {
-  state = { userInput: '', suggestion: '', description: '' }
+  state = { name: '', suggestion: '', description: '' }
 
   handleChange = event => this.setState({[event.target.name]: event.target.value})
 
@@ -17,10 +17,9 @@ class NewGroupForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    const newGroupName = this.state.userInput
-    const suggestion = this.state.suggestion
+    const { name, suggestion, description } = this.state
     const userID = this.props.currentUser.id.toString()
-    this.props.createNewGroup(userID, newGroupName, suggestion)
+    this.props.createNewGroup(userID, name, suggestion, description)
     this.props.history.push({ pathname: '/' })
   }
 
@@ -32,23 +31,15 @@ class NewGroupForm extends Component {
   formatSuggestions = () => suggestions.map(suggestion => ({...suggestion, text: this.formatName(suggestion), value: suggestion}))
 
   render() {
-    // const background = require('../../images/background.jpg')
-    // const sectionStyle = {
-    //     backgroundPosition: 'center',
-    //     backgroundSize: 'cover',
-    //     backgroundRepeat: 'noRepeat',
-    //     backgroundImage: 'url(' + background + ')',
-    //     height: '1500px'
-    // };
     const suggestionsOptions = this.formatSuggestions()
     return (
         <Container style={{width: '350px'}}>
           <Form onSubmit={event => this.handleSubmit(event)}>
             <Form.Field>
               <br />
-              <Input placeholder='Name' value={this.state.userInput} name='userInput' onChange={this.handleChange} />
+              <Input placeholder='Name' value={this.state.name} name='name' onChange={this.handleChange} />
               <br /><br />
-              <TextArea placeholder='Group Description' name='description' value={this.state.description}  />
+              <TextArea placeholder='Group Description' name='description' value={this.state.description} onChange={this.handleChange}  />
             </Form.Field>
             <br />
             <Dropdown placeholder='Select Preferred Meet Up Spot' fluid selection options={suggestionsOptions} onChange={this.handleSuggestion}/>
