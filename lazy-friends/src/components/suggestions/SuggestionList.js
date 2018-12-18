@@ -1,11 +1,10 @@
 import React from 'react';
 import SuggestionItem from './SuggestionItem';
 import { connect } from 'react-redux';
+// import { testSuggs } from '../../constants/suggestions'
 
 class SuggestionList extends React.Component {
-  state = {
-    suggestions: []
-  }
+  state = { suggestions: [] }
 
   // componentDidUpdate(prevProps, prevState) {
   //   this.getSuggestions()
@@ -62,14 +61,11 @@ class SuggestionList extends React.Component {
       return <p>There are no suggestions in this area.</p>
     }
 
-    const suggestionItem = this.state.suggestions.map( suggestion => {
-      return (
-        <SuggestionItem
-          key={suggestion.id}
-          suggestion={suggestion}
-        />
-      )
-    })
+    const sortedSuggestions = this.state.suggestions.sort((a,b) => parseFloat(b.rating) - parseFloat(a.rating))
+    // const sortedSuggestions = testSuggs.sort((a,b) => parseFloat(b.rating) - parseFloat(a.rating))
+    const suggestionItem = sortedSuggestions.map( suggestion => (
+      <SuggestionItem key={suggestion.id} suggestion={suggestion} />
+    ))
 
     return (
       <div>

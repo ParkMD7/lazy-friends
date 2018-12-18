@@ -1,17 +1,13 @@
 export const suggestions = [
-  "amusement_park",
-  "aquarium",
-  "art_gallery",
   "bar",
-  "bowling_alley",
   "cafe",
-  "campground",
-  "casino",
   "movie_theater",
-  "museum",
   "night_club",
-  "park",
-  "restaurant",
-  "shopping_mall",
-  "zoo"
+  "restaurant"
+]
+
+export const testSuggs = [
+  { name: 'Whiskey Brooklyn', vicinity: 'Williamsburg', rating: '4.7' },
+  { name: 'Barcade', vicinity: 'Williamsburg', rating: '4.2' },
+  { name: 'Shuffleboard Club', vicinity: 'Brooklyn', rating: '5.0' }
 ]
