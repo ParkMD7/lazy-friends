@@ -60,31 +60,12 @@ class GroupShowPage extends Component {
               </Grid.Column>
             </Grid.Row>
             <Grid.Row columns={1} centered>
-              <Grid.Column width={6} textAlign='center' centered>
+              <Grid.Column width={6} textAlign='center'>
                 <h2 style={{color:'white'}}>Group Info</h2>
                 <Card centered style={{width:'400px', opacity:'0.9'}}>
                   <Card.Content>
                     <Header>Name: {this.props.group.name}</Header>
                     <Feed.Date content=<span>Updated: {this.props.group.updated_at.toString().split('T')[0]}</span> />
-                  </Card.Content>
-                  <Card.Content>
-                    <h5>Current Members:</h5>
-                    <div style={{overflowY: 'scroll', height: '75px'}}>
-                      {this.props.group.users.map(user => {
-                        return(
-                          <Feed key={user.id}>
-                            <Feed.Event>
-                              <Feed.Label image={user.profile_url} />
-                              <Feed.Content>
-                                <Feed.Summary>
-                                  <a>{user.name}</a> joined <a>{this.props.group.name}</a>
-                                </Feed.Summary>
-                              </Feed.Content>
-                            </Feed.Event>
-                          </Feed>
-                        )
-                      })}
-                    </div>
                   </Card.Content>
                   <Card.Content extra>
                     <Button fluid basic color='green' onClick={() => this.handleGroupJoin(this.props.group)}>
@@ -92,6 +73,10 @@ class GroupShowPage extends Component {
                     </Button>
                   </Card.Content>
                 </Card>
+              </Grid.Column>
+              <Grid.Column width={6} textAlign='center'>
+                <Header style={{color: 'white'}}>Group Members</Header>
+                <GroupContainer />
               </Grid.Column>
             </Grid.Row>
           </Grid>
