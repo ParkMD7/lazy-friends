@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import { Container, Header, Card, Feed, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
+import _ from 'lodash';
 
 // user files
 import { fetchGroups } from '../../actions/fetchGroups'
@@ -23,60 +24,59 @@ class Groups extends Component {
     })
   }
 
-  groupsToDisplay = (groups) => {
-    if(!groups){
-      return <p>Loading Groups...</p>
-    }
+  groupsToDisplay = () => {
+    // since I turned the fetched API into an object in reducers/goalsReducer I am now using lodash to map over that object
+    return _.map(this.props.allGroups, group => {
 
-    const groupsWithoutCurrentUser = groups.filter(group => {
-      const userGroups = group.users.filter(user => {
-        return user.id !== this.props.currentUser.id
+      let usersAlreadyJoinedGroup = this.props.userGroups.find( userGroup => {
+        return userGroup.id === group.id
+        })
+
+      return !usersAlreadyJoinedGroup ?
+        (
+          <Card centered style={{width:'400px', opacity:'0.9'}}>
+            <Card.Content>
+              <Link to={`/groups/${group.id}`}>
+                <Header>Name: {group.name}</Header>
+                <Feed.Date content=<span>Updated: {group.updated_at.toString()}</span> />
+              </Link>
+            </Card.Content>
+            <Card.Content>
+              <h5>Current Members:</h5>
+              <div style={{overflowY: 'scroll', height: '75px'}}>
+                {group.users.map(user => {
+                  return(
+                    <Feed key={user.id}>
+                      <Feed.Event>
+                        <Feed.Label image={user.profile_url} />
+                        <Feed.Content>
+                          <Feed.Summary>
+                            <a>{user.name}</a> joined <a>{group.name}</a>
+                          </Feed.Summary>
+                        </Feed.Content>
+                      </Feed.Event>
+                    </Feed>
+                  )
+                })}
+              </div>
+            </Card.Content>
+            <Card.Content extra>
+              <Button fluid basic color='green' onClick={() => this.handleGroupJoin(group)}>
+                Join Group
+              </Button>
+            </Card.Content>
+          </Card>
+        )
+        :
+        null
       })
-      if(userGroups.length === group.users.length){
-        return userGroups
-      }
-    })
-
-    return groupsWithoutCurrentUser.map( group => {
-      // debugger
-      // return <Header key={group.id} onClick={() => this.handleGroupJoin(group)}> {group.name} </Header>
-      return(
-        <Card centered style={{width:'400px', opacity:'0.9'}}>
-          <Card.Content>
-            <Header>Name: {group.name}</Header>
-            <Feed.Date content=<span>Updated: {group.updated_at.toString()}</span> />
-          </Card.Content>
-          <Card.Content>
-            <h5>Current Members:</h5>
-            <div style={{overflowY: 'scroll', height: '75px'}}>
-              {group.users.map(user => {
-                return(
-                  <Feed key={user.id}>
-                    <Feed.Event>
-                      <Feed.Label image={user.profile_url} />
-                      <Feed.Content>
-                        <Feed.Summary>
-                          <a>{user.name}</a> joined <a>{group.name}</a>
-                        </Feed.Summary>
-                      </Feed.Content>
-                    </Feed.Event>
-                  </Feed>
-                )
-              })}
-            </div>
-          </Card.Content>
-          <Card.Content extra>
-            <Button fluid basic color='green' onClick={() => this.handleGroupJoin(group)}>
-              Join Group
-            </Button>
-          </Card.Content>
-        </Card>
-      )
-    })
   }
 
   render() {
-    console.log(this.props)
+    if(Object.keys(this.props.allGroups).length === 0){
+      return <h1>Loading Groups</h1>
+    }
+    console.log('%c GGroups Page Props: ', 'color: green', this.props.allGroups, this.props.currentUser);
     return (
       <div>
         <br/>
@@ -84,7 +84,8 @@ class Groups extends Component {
         <br/>
         <Container centered className="ui container center aligned" style={{overflowY: 'scroll', height: '600px'}}>
           <Card.Group centered itemsPerRow={2}>
-            {this.groupsToDisplay(this.props.allGroups)}
+            {/* {this.groupsToDisplay(this.props.allGroups)} */}
+            {this.groupsToDisplay()}
           </Card.Group>
         </Container>
       </div>
@@ -93,10 +94,10 @@ class Groups extends Component {
 
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     currentUser: state.currentUser.user,
-    allGroups: state.groupsReducer.groups,
+    allGroups: state.groupsReducer,
     userGroups: state.currentUser.userGroups
   }
 }

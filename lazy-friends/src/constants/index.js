@@ -7,6 +7,7 @@ export const AUTHENTICATED_USER = 'AUTHENTICATED_USER';
 export const FAILED_LOGIN = 'FAILED_LOGIN';
 
 export const FETCH_GROUPS = 'FETCH_GROUPS'
+export const FETCH_GROUP = 'FETCH_GROUP'
 export const JOIN_GROUP = 'JOIN_GROUP'
 export const CREATE_GROUP = 'CREATE_GROUP'
 export const LEAVE_GROUP = 'LEAVE_GROUP'
