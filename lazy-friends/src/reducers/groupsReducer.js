@@ -5,7 +5,7 @@ import _ from 'lodash' // allows me to change data type of fetched goals from an
 import { FETCH_GROUPS, FETCH_GROUP, CREATE_GROUP } from '../constants';
 
 const defaultState = {
-  groups: []
+  // groups: []
 }
 
 export default function(state=defaultState, action){
