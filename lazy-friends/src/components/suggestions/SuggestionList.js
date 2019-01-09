@@ -32,12 +32,14 @@ class SuggestionList extends React.Component {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            coordinates: this.props.currentCoords
+            coordinates: this.props.currentCoords,
+            preferences: this.props.currentGroup.suggestions
           })
         })
       .then(response => response.json())
       .then(googleData => {
         if(googleData.status === 'OK'){
+          debugger
           if(!(this.checkResults(googleData.results))){
             this.setState({
               suggestions: googleData.results
@@ -73,7 +75,8 @@ class SuggestionList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentCoords: state.currentCoords
+    currentCoords: state.currentCoords,
+    currentGroup: state.currentUser.currentGroup
   }
 }
 
