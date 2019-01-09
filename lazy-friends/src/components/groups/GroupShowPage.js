@@ -7,8 +7,7 @@ import { Card, Icon, Image, Button, Grid, Feed, Header } from 'semantic-ui-react
 // user files
 import { fetchGroup } from '../../actions/fetchGroup'
 import { joinGroup } from '../../actions/joinGroup'
-import { selectGroup } from '../../actions/currentGroup'
-import GroupContainer from './GroupContainer'
+
 
 class GroupShowPage extends Component {
 
@@ -17,13 +16,6 @@ class GroupShowPage extends Component {
     this.props.fetchGroup(groupID);
   }
 
-  handleGroupJoin = (group) => {
-    const userID = this.props.user.id.toString()
-    this.props.joinGroup(userID, group)
-    this.props.history.push({
-      pathname: '/'
-    })
-  }
 
   render(){
     console.log('%c GroupShow Props: ', 'color: yellow', this.props);
@@ -54,12 +46,40 @@ class GroupShowPage extends Component {
               </Grid.Column>
             </Grid.Row>
             <Grid.Row columns={1} centered>
+<<<<<<< HEAD
+              <Grid.Column width={6} textAlign='center' centered>
+                <h2>Group Info</h2>
+                <Card centered style={{width:'400px', opacity:'0.9'}}>
+                  <Card.Content>
+                    <Header>Name: {this.props.group.name}</Header>
+                    <Feed.Date content=<span>Updated: {this.props.group.updated_at.toString()}</span> />
+                  </Card.Content>
+                  <Card.Content>
+                    <h5>Current Members:</h5>
+                    <div style={{overflowY: 'scroll', height: '75px'}}>
+                      {this.props.group.users.map(user => {
+                        return(
+                          <Feed key={user.id}>
+                            <Feed.Event>
+                              <Feed.Label image={user.profile_url} />
+                              <Feed.Content>
+                                <Feed.Summary>
+                                  <a>{user.name}</a> joined <a>{this.props.group.name}</a>
+                                </Feed.Summary>
+                              </Feed.Content>
+                            </Feed.Event>
+                          </Feed>
+                        )
+                      })}
+                    </div>
+=======
               <Grid.Column width={6} textAlign='center'>
                 <h2 style={{color:'white'}}>Group Info</h2>
                 <Card centered style={{width:'400px', opacity:'0.9', overflowY: 'scroll', height: '450px'}}>
                   <Card.Content>
                     <Header>{this.props.group.name}</Header>
                     <Feed.Date content=<span>Recent Activity: {this.props.group.updated_at.toString().split('T')[0]}</span> />
+>>>>>>> c0f943004de24c342ff1e5870d6355d73b43ccd7
                   </Card.Content>
                   <Card.Content extra>
                     <Button fluid basic color='green' onClick={() => this.handleGroupJoin(this.props.group)}>
@@ -85,8 +105,7 @@ class GroupShowPage extends Component {
 const mapStateToProps = ({ currentUser, groupsReducer }, ownProps) => ({
   // this GroupShowPage component will now only recieve the 1 that a user clicks on
   group: groupsReducer[ownProps.match.params.id],
-  user: currentUser.user,
-  currentUserGroups: currentUser.userGroups
+  user: currentUser.user
 })
 
-export default withRouter(connect(mapStateToProps, { fetchGroup, joinGroup, selectGroup })(GroupShowPage));
+export default withRouter(connect(mapStateToProps, { fetchGroup, joinGroup })(GroupShowPage));
