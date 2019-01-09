@@ -95,7 +95,7 @@ class Groups extends Component {
 const mapStateToProps = (state) => {
   return {
     currentUser: state.currentUser.user,
-    allGroups: state.groupsReducer,
+    allGroups: state.groupsReducer.groups,
     userGroups: state.currentUser.userGroups
   }
 }
