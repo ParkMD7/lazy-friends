@@ -16,6 +16,13 @@ class GroupShowPage extends Component {
     this.props.fetchGroup(groupID);
   }
 
+  handleGroupJoin = (group) => {
+    const userID = this.props.user.id.toString()
+    this.props.joinGroup(userID, group)
+    this.props.history.push({
+      pathname: '/'
+    })
+  }
 
   render(){
     console.log('%c GroupShow Props: ', 'color: yellow', this.props);
