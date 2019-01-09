@@ -15,12 +15,6 @@ class GroupShowPage extends Component {
   componentDidMount() {
     const groupID = this.props.match.params.id // this params object will contain all wildcard tokens in our url route -> I am pulling off the id
     this.props.fetchGroup(groupID);
-    this.selectGroup()
-  }
-
-  selectGroup = () => {
-    const selectedGroup = this.props.currentUserGroups.find( group => group.id == this.props.match.params.id )
-    this.props.selectGroup(selectedGroup)
   }
 
   handleGroupJoin = (group) => {
@@ -62,10 +56,10 @@ class GroupShowPage extends Component {
             <Grid.Row columns={1} centered>
               <Grid.Column width={6} textAlign='center'>
                 <h2 style={{color:'white'}}>Group Info</h2>
-                <Card centered style={{width:'400px', opacity:'0.9'}}>
+                <Card centered style={{width:'400px', opacity:'0.9', overflowY: 'scroll', height: '450px'}}>
                   <Card.Content>
-                    <Header>Name: {this.props.group.name}</Header>
-                    <Feed.Date content=<span>Updated: {this.props.group.updated_at.toString().split('T')[0]}</span> />
+                    <Header>{this.props.group.name}</Header>
+                    <Feed.Date content=<span>Recent Activity: {this.props.group.updated_at.toString().split('T')[0]}</span> />
                   </Card.Content>
                   <Card.Content extra>
                     <Button fluid basic color='green' onClick={() => this.handleGroupJoin(this.props.group)}>
@@ -75,8 +69,10 @@ class GroupShowPage extends Component {
                 </Card>
               </Grid.Column>
               <Grid.Column width={6} textAlign='center'>
-                <Header style={{color: 'white'}}>Group Members</Header>
-                <GroupContainer />
+                <h2 style={{color: 'white'}}>Group Members</h2>
+                <div style={{opacity:'0.9', height: '450px', overflowY:'scroll'}}>
+                  <GroupContainer selectedGroup={this.props.group} />
+                </div>
               </Grid.Column>
             </Grid.Row>
           </Grid>

@@ -14,7 +14,6 @@ import { config } from './config'
 
 class MainPage extends Component {
 
-
   handleMiddleCoords = (coordinates) => {
     this.props.updateCoordinates(coordinates)
   }
@@ -53,7 +52,9 @@ class MainPage extends Component {
         <br /><br /><br /><br />
         <Grid.Row columns={3} centered>
           <Grid.Column className="ui container center aligned">
-            <GroupContainer />
+            <div style={{opacity:'0.9', height: '550px', overflowY:'scroll'}}>
+              <GroupContainer selectedGroup={this.props.currentGroup} />
+            </div>
           </Grid.Column>
 
           <Grid.Column className="ui container center aligned">
@@ -89,6 +90,7 @@ class MainPage extends Component {
 }
 
 const mapStateToProps = (state) => {
+  debugger
   return {
     currentUser: state.currentUser.user,
     currentGroup: state.currentUser.currentGroup,
