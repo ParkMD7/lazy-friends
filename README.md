@@ -9,3 +9,5 @@ Lazy Friends was written in React with Redux, and utilized a [backend](https://g
 ## Using the app
 
 Follow the backend link above to clone the Rails section of this app.  After following those instructions to get the server up and running, clone down this repo.  After changing into the directory for Lazy Friends, run either `npm install` or `yarn` to install the node modules, and then run `npm start` or `yarn start`. You'll need to create a config.js file to store your own Google API key for the fetches to work. 
+
+## [Demo Video](https://youtu.be/XpV99A2jCXw)
