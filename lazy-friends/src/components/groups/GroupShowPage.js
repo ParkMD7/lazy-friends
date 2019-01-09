@@ -7,15 +7,29 @@ import { Card, Icon, Image, Button, Grid, Feed, Header } from 'semantic-ui-react
 // user files
 import { fetchGroup } from '../../actions/fetchGroup'
 import { joinGroup } from '../../actions/joinGroup'
-
+import { selectGroup } from '../../actions/currentGroup'
+import GroupContainer from './GroupContainer'
 
 class GroupShowPage extends Component {
 
   componentDidMount() {
     const groupID = this.props.match.params.id // this params object will contain all wildcard tokens in our url route -> I am pulling off the id
     this.props.fetchGroup(groupID);
+    this.selectGroup()
   }
 
+  selectGroup = () => {
+    const selectedGroup = this.props.currentUserGroups.find( group => group.id == this.props.match.params.id )
+    this.props.selectGroup(selectedGroup)
+  }
+
+  handleGroupJoin = (group) => {
+    const userID = this.props.user.id.toString()
+    this.props.joinGroup(userID, group)
+    this.props.history.push({
+      pathname: '/'
+    })
+  }
 
   render(){
     console.log('%c GroupShow Props: ', 'color: yellow', this.props);
@@ -47,11 +61,11 @@ class GroupShowPage extends Component {
             </Grid.Row>
             <Grid.Row columns={1} centered>
               <Grid.Column width={6} textAlign='center' centered>
-                <h2>Group Info</h2>
+                <h2 style={{color:'white'}}>Group Info</h2>
                 <Card centered style={{width:'400px', opacity:'0.9'}}>
                   <Card.Content>
                     <Header>Name: {this.props.group.name}</Header>
-                    <Feed.Date content=<span>Updated: {this.props.group.updated_at.toString()}</span> />
+                    <Feed.Date content=<span>Updated: {this.props.group.updated_at.toString().split('T')[0]}</span> />
                   </Card.Content>
                   <Card.Content>
                     <h5>Current Members:</h5>
@@ -90,7 +104,8 @@ class GroupShowPage extends Component {
 const mapStateToProps = ({ currentUser, groupsReducer }, ownProps) => ({
   // this GroupShowPage component will now only recieve the 1 that a user clicks on
   group: groupsReducer[ownProps.match.params.id],
-  user: currentUser.user
+  user: currentUser.user,
+  currentUserGroups: currentUser.userGroups
 })
 
-export default withRouter(connect(mapStateToProps, { fetchGroup, joinGroup })(GroupShowPage));
+export default withRouter(connect(mapStateToProps, { fetchGroup, joinGroup, selectGroup })(GroupShowPage));

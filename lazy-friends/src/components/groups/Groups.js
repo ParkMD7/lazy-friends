@@ -31,14 +31,14 @@ class Groups extends Component {
       let usersAlreadyJoinedGroup = this.props.userGroups.find( userGroup => {
         return userGroup.id === group.id
         })
-
+      debugger
       return !usersAlreadyJoinedGroup ?
         (
           <Card centered style={{width:'400px', opacity:'0.9'}}>
             <Card.Content>
               <Link to={`/groups/${group.id}`}>
                 <Header>Name: {group.name}</Header>
-                <Feed.Date content=<span>Updated: {group.updated_at.toString()}</span> />
+                <Feed.Date content=<span>Updated: {group.updated_at.toString().split('T')[0]}</span> />
               </Link>
             </Card.Content>
             <Card.Content>
@@ -73,7 +73,7 @@ class Groups extends Component {
   }
 
   render() {
-    if(Object.keys(this.props.allGroups).length === 0){
+    if(!this.props.allGroups){
       return <h1>Loading Groups</h1>
     }
     console.log('%c GGroups Page Props: ', 'color: green', this.props.allGroups, this.props.currentUser);
@@ -84,7 +84,6 @@ class Groups extends Component {
         <br/>
         <Container centered className="ui container center aligned" style={{overflowY: 'scroll', height: '600px'}}>
           <Card.Group centered itemsPerRow={2}>
-            {/* {this.groupsToDisplay(this.props.allGroups)} */}
             {this.groupsToDisplay()}
           </Card.Group>
         </Container>
