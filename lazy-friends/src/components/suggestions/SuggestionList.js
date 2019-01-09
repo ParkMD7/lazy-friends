@@ -6,10 +6,6 @@ import { connect } from 'react-redux';
 class SuggestionList extends React.Component {
   state = { suggestions: [] }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   this.getSuggestions()
-  // }
-
   checkResults = (results) => {
     let isEqual = true
 
