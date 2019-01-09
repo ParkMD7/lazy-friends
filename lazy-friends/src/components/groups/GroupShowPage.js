@@ -51,7 +51,7 @@ class GroupShowPage extends Component {
                 <Card centered style={{width:'400px', opacity:'0.9'}}>
                   <Card.Content>
                     <Header>Name: {this.props.group.name}</Header>
-                    <Feed.Date content=<span>Updated: {this.props.group.updated_at.toString()}</span> />
+                    <Feed.Date content=<span>Updated: {this.props.group.updated_at.toString().split('T')[0]}</span> />
                   </Card.Content>
                   <Card.Content>
                     <h5>Current Members:</h5>

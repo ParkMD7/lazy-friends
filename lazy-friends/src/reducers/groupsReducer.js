@@ -17,7 +17,7 @@ export default function(state=defaultState, action){
       return _.mapKeys(action.payload.data.groups, 'id')
 
     case FETCH_GROUP:
-    debugger
+      debugger
       // include all groups we've fetched above & put them into this new object
       // add the newly fetched group that a user has clicked on as a new key:value pair
       return { ...state, [action.payload.data.id]: action.payload.data }

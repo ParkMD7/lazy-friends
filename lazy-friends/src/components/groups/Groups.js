@@ -38,7 +38,7 @@ class Groups extends Component {
             <Card.Content>
               <Link to={`/groups/${group.id}`}>
                 <Header>Name: {group.name}</Header>
-                <Feed.Date content=<span>Updated: {group.updated_at.toString()}</span> />
+                <Feed.Date content=<span>Updated: {group.updated_at.toString().split('T')[0]}</span> />
               </Link>
             </Card.Content>
             <Card.Content>
