@@ -37,12 +37,11 @@ class SuggestionList extends React.Component {
           })
         })
       .then(response => response.json())
-      .then(googleData => {
-        if(googleData.status === 'OK'){
-          debugger
-          if(!(this.checkResults(googleData.results))){
+      .then(yelpData => {
+        if(!!yelpData.businesses){
+          if(!(this.checkResults(yelpData.results))){
             this.setState({
-              suggestions: googleData.results
+              suggestions: yelpData.businesses
             })
           }
         }
