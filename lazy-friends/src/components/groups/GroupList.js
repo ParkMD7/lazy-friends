@@ -6,24 +6,26 @@ import { Card } from 'semantic-ui-react'
 class GroupList extends React.Component {
 
   render() {
-    if(JSON.stringify(this.props.currentGroup) === JSON.stringify({}) || this.props.currentGroup === undefined){
+    if(JSON.stringify(this.props.selectedGroup) === JSON.stringify({}) || this.props.selectedGroup === undefined){
       return null
     }
 
     return (
-      <div className="ui container center aligned" style={{overflowY: 'scroll', height: '550px'}}>
-        <div>
-          {this.props.currentGroup.users.map(groupUser => <GroupMember key={groupUser.id} {...groupUser} />)}
+        <div className="ui container center aligned" style={{height: '550px'}}>
+          <div>
+            {this.props.selectedGroup.users.map(groupUser => <GroupMember key={groupUser.id} {...groupUser} />)}
+          </div>
         </div>
-      </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    currentGroup: state.currentUser.currentGroup
-  }
-}
+// const mapStateToProps = (state, ownProps) => {
+//   return {
+//     currentGroup: state.currentUser.currentGroup,
+//     selectedGroup: state.groupsReducer[ownProps.match.params.id]
+//   }
+// }
 
-export default connect(mapStateToProps)(GroupList);
+// export default connect(mapStateToProps)(GroupList);
+export default GroupList;

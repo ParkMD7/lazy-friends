@@ -31,7 +31,6 @@ class Groups extends Component {
       let usersAlreadyJoinedGroup = this.props.userGroups.find( userGroup => {
         return userGroup.id === group.id
         })
-
       return !usersAlreadyJoinedGroup ?
         (
           <Card centered style={{width:'400px', opacity:'0.9'}}>

@@ -7,7 +7,7 @@ class GroupContainer extends Component {
     return (
       <div className="ui container center aligned" style={{height: '550px'}}>
         <Container fluid>
-          <GroupList />
+          <GroupList selectedGroup={this.props.selectedGroup} />
         </Container>
       </div>
     )
