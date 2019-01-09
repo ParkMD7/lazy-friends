@@ -5,13 +5,14 @@ import _ from 'lodash' // allows me to change data type of fetched goals from an
 import { FETCH_GROUPS, FETCH_GROUP, CREATE_GROUP } from '../constants';
 
 const defaultState = {
-  groups: []
+  // groups: []
 }
 
 export default function(state=defaultState, action){
   switch(action.type){
 
     case FETCH_GROUPS:
+      debugger
       // using lodash to turn an array of fetched goals into an object with a key/value pair of goal ID & goal object
       return _.mapKeys(action.payload.data.groups, 'id')
 
