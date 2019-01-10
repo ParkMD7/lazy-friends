@@ -7,7 +7,7 @@ import { Card, Icon, Image, Button, Grid, Feed, Header } from 'semantic-ui-react
 // user files
 import { fetchGroup } from '../../actions/fetchGroup'
 import { joinGroup } from '../../actions/joinGroup'
-
+import GroupContainer from './GroupContainer'
 
 class GroupShowPage extends Component {
 
@@ -71,6 +71,15 @@ class GroupShowPage extends Component {
                         )
                       })}
                     </div>
+                  </Card.Content>
+                </Card>
+              </Grid.Column>
+              <Grid.Column width={6} textAlign='center'>
+                <h2 style={{color:'white'}}>Group Info</h2>
+                <Card centered style={{width:'400px', opacity:'0.9', overflowY: 'scroll', height: '450px'}}>
+                  <Card.Content>
+                    <Header>{this.props.group.name}</Header>
+                    <Feed.Date content=<span>Recent Activity: {this.props.group.updated_at.toString().split('T')[0]}</span> />
                   </Card.Content>
                   <Card.Content extra>
                     <Button fluid basic color='green' onClick={() => this.handleGroupJoin(this.props.group)}>

@@ -6,10 +6,6 @@ import { connect } from 'react-redux';
 class SuggestionList extends React.Component {
   state = { suggestions: [] }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   this.getSuggestions()
-  // }
-
   checkResults = (results) => {
     let isEqual = true
 
@@ -36,15 +32,16 @@ class SuggestionList extends React.Component {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            coordinates: this.props.currentCoords
+            coordinates: this.props.currentCoords,
+            preferences: this.props.currentGroup.suggestions
           })
         })
       .then(response => response.json())
-      .then(googleData => {
-        if(googleData.status === 'OK'){
-          if(!(this.checkResults(googleData.results))){
+      .then(yelpData => {
+        if(!!yelpData.businesses){
+          if(!(this.checkResults(yelpData.results))){
             this.setState({
-              suggestions: googleData.results
+              suggestions: yelpData.businesses
             })
           }
         }
@@ -77,7 +74,8 @@ class SuggestionList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentCoords: state.currentCoords
+    currentCoords: state.currentCoords,
+    currentGroup: state.currentUser.currentGroup
   }
 }
 
