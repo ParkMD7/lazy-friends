@@ -2,14 +2,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Container, Header, Card, Button, Confirm, Image, Grid, Statistic, Icon } from 'semantic-ui-react';
-import _ from 'lodash'
+import { Container, Header, Card, Button, Confirm, Image, Grid, Icon } from 'semantic-ui-react';
+
+// user files
+import { leaveGroup } from '../actions/leaveGroup'
+
 
 
 class Profile extends Component {
 
   formatName = (name) => {
     return name.charAt(0).toUpperCase() + name.slice(1);
+  }
+
+  handleLeaveGroup = (group) => {
+    const userID = this.props.currentUser.id.toString()
+    this.props.leaveGroup(userID, group)
   }
 
   displayUsersGroups = () => {
@@ -30,6 +38,7 @@ class Profile extends Component {
       )
     })
   }
+
 
   render() {
     return (
@@ -76,4 +85,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps, { leaveGroup })(Profile);

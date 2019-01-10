@@ -90,7 +90,6 @@ class MainPage extends Component {
 }
 
 const mapStateToProps = (state) => {
-  debugger
   return {
     currentUser: state.currentUser.user,
     currentGroup: state.currentUser.currentGroup,

@@ -46,7 +46,6 @@ class GroupShowPage extends Component {
               </Grid.Column>
             </Grid.Row>
             <Grid.Row columns={1} centered>
-<<<<<<< HEAD
               <Grid.Column width={6} textAlign='center' centered>
                 <h2>Group Info</h2>
                 <Card centered style={{width:'400px', opacity:'0.9'}}>
@@ -72,14 +71,6 @@ class GroupShowPage extends Component {
                         )
                       })}
                     </div>
-=======
-              <Grid.Column width={6} textAlign='center'>
-                <h2 style={{color:'white'}}>Group Info</h2>
-                <Card centered style={{width:'400px', opacity:'0.9', overflowY: 'scroll', height: '450px'}}>
-                  <Card.Content>
-                    <Header>{this.props.group.name}</Header>
-                    <Feed.Date content=<span>Recent Activity: {this.props.group.updated_at.toString().split('T')[0]}</span> />
->>>>>>> c0f943004de24c342ff1e5870d6355d73b43ccd7
                   </Card.Content>
                   <Card.Content extra>
                     <Button fluid basic color='green' onClick={() => this.handleGroupJoin(this.props.group)}>
@@ -87,12 +78,6 @@ class GroupShowPage extends Component {
                     </Button>
                   </Card.Content>
                 </Card>
-              </Grid.Column>
-              <Grid.Column width={6} textAlign='center'>
-                <h2 style={{color: 'white'}}>Group Members</h2>
-                <div style={{opacity:'0.9', height: '450px', overflowY:'scroll'}}>
-                  <GroupContainer selectedGroup={this.props.group} />
-                </div>
               </Grid.Column>
             </Grid.Row>
           </Grid>
