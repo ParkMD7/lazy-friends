@@ -15,9 +15,9 @@ const GroupDropdown = ({currentUserGroups, selectGroup, currentGroup}) => {
   }
 
   return currentUserGroups.length === 0 ?
-    <Dropdown style={{height: '10px', fontSize: '20px'}} onChange={(event) => event.preventDefault()} text={'Please Join A Group To See The Middle Point'} fluid selection />
+    <Dropdown style={{height: '10px', fontSize: '20px', color: 'black', backgroundColor: 'rgba(250, 208, 155, 0.8)'}} onChange={(event) => event.preventDefault()} text={'Please Join A Group To See The Middle Point'} fluid selection />
       :
-    <Dropdown style={{height: '10px', fontSize: '20px'}} onChange={handleGroupChange} text={currentGroup.name} fluid selection options={formatGroupsForDropdown()}/>
+    <Dropdown style={{height: '10px', fontSize: '20px', color: 'rgba(250, 208, 155)', backgroundColor: 'rgba(0, 0, 0, 0.8)'}} onChange={handleGroupChange} text={`Group Name: ${currentGroup.name}`} fluid selection options={formatGroupsForDropdown()}/>
 };
 
 const mapStateToProps = (state) => {

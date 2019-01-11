@@ -16,8 +16,8 @@ class NavBar extends Component {
     console.log('%c GoalListContainer Props: ', 'color: green', this.props.user);
     if(!this.props.user){
       return (
-        <Menu size='massive' borderless style={{width: '350px'}}>
-          <Dropdown size='massive' item fluid text='Menu ' style={{width: '200px', color: 'red', 'fontFamily':'Montserrat'}}>
+        <Menu inverted size='massive' borderless style={{width: '350px', backgroundColor: 'rgba(0, 0, 0, 0)'}}>
+          <Dropdown item text='Navigation Menu' style={{width: '200px', color: 'rgba(250, 208, 155)', 'fontFamily':'Montserrat'}}>
             <Dropdown.Menu inverted>
 
               <Dropdown.Item as={ Link } name='login' to='/login'>
@@ -37,10 +37,9 @@ class NavBar extends Component {
     }
 
     return(
-      <Menu size='massive' borderless style={{width: '350px'}}>
-        <Dropdown size='massive' item fluid text='Menu ' style={{width: '200px', color: 'red', 'fontFamily':'Montserrat'}}>
-          <Dropdown.Menu inverted>
-
+      <Menu inverted size='massive' borderless style={{width: '350px', backgroundColor: 'rgba(0, 0, 0, 0)'}}>
+        <Dropdown item text='Navigation Menu' style={{width: '200px', color: 'rgba(250, 208, 155)', 'fontFamily':'Montserrat'}}>
+          <Dropdown.Menu>
             <Dropdown.Item as={ Link } name='home' to='/'>
               <Icon name='home' circular fitted color='red' size='large' aria-label='home'/>
               Home

@@ -32,7 +32,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={ () => <MainPage /> } />
             <Route exact path='/profile' component={ () => <Profile /> } />
-            <Route exact path='/newgroup' component={NewGroupForm} />
+            <Route exact path='/newgroup' component={ () => <NewGroupForm /> } />
             <Route exact path='/groups' component={ () => <Groups />} />
             <Route exact path='/groups/:id' component={ () => <GroupShowPage /> } />
             <Route exact path='/signup' component={ () => <SignUp /> } />

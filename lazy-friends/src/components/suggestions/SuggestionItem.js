@@ -1,29 +1,48 @@
 import React from 'react'
-import { Card, Image, Grid } from 'semantic-ui-react'
+import { Card, Image, Grid, Button, Icon } from 'semantic-ui-react'
 
 
 const SuggestionItem = ({suggestion}) => {
-  debugger
+  console.log('%c SuggestionItem Props: ', 'color: pink', suggestion)
+
+  const handleCreateGroupEvent = (event) => {
+    event.preventDefault()
+    console.log('Event Created')
+  }
+
   return (
     <div className="ui container center aligned">
-      <Card fluid style={{marginBottom: '15px' }}>
+      <Card centered fluid style={{marginBottom: '15px', backgroundColor: 'rgba(0, 0, 0, 0.8)', color: 'rgba(250, 208, 155)' }}>
         <div width='100%'>
-          <h2>{suggestion.name}</h2>
-          <Image centered src={suggestion.image_url} style={{height: '250px', width: '100%' }}/>
-          <h4>Location: {suggestion.location.display_address.join(' ')}</h4>
-          <h4>Call: {suggestion.display_phone}</h4>
-          <Grid>
-            <Grid.Row columns={2}>
-              <Grid.Column textAlign='centered' width={8}>
-                <h5>Rating: {suggestion.rating}</h5>
-              </Grid.Column>
-                {
-                  !!suggestion.price ?
-                  <Grid.Column textAlign='centered' width={8}><h5>Price: {suggestion.price}</h5></Grid.Column> :
-                  null
-                }
-            </Grid.Row>
-          </Grid>
+          <Card.Header style={{fontSize: '25px', marginTop: '10px'}}>{suggestion.name}</Card.Header>
+          <br />
+          <Card.Meta style={{color: 'white', fontSize: '17px'}}>{suggestion.location.display_address.join(' ')}</Card.Meta>
+          <Image centered src={suggestion.image_url} alt="oh no!" style={{height: '325px', width: '350px' }}/>
+          <Card.Content style={{fontSize: '17px'}}>
+            <Card.Meta style={{color: 'white'}}>{ !!suggestion.display_phone ? suggestion.display_phone : 'Number Not Listed' }</Card.Meta>
+            <Grid>
+              <Grid.Row columns={1}>
+                <Grid.Column textAlign='centered' width={16}>
+                  <Card.Description>Venue Type: { !!suggestion.categories[0].title ? suggestion.categories[0].title : 'Not Available' } </Card.Description>
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row columns={2}>
+                <Grid.Column textAlign='centered' width={8}>
+                  <Card.Description>Rating: { !!suggestion.rating ? `${suggestion.rating}/5 (${suggestion.review_count} Reviews)` : 'Not Available' } </Card.Description>
+                </Grid.Column>
+                <Grid.Column textAlign='centered' width={8}>
+                  <Card.Description>Price: { !!suggestion.price ? suggestion.price : 'Not Available' } </Card.Description>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Card.Content>
+          <br />
+          <Card.Content extra>
+            <Button style={{color: 'black', backgroundColor: 'rgba(250, 208, 155)'}} fluid onClick={() => this.handleCreateGroupEvent()}>
+              <Icon name='plus' />
+              Create An Event At <span style={{textDecoration: 'underline'}}>{suggestion.name}</span> Your Group
+            </Button>
+          </Card.Content>
         </div>
       </Card>
     </div>
