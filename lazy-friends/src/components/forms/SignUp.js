@@ -53,10 +53,10 @@ class SignUp extends Component {
       <Container text textAlign='center'>
         <Grid>
           <Grid.Column width={16} fluid centered='true' >
-            <Card centered textalign='center' style={{height: 'auto', width: '700px'}}>
+            <Card centered textalign='center' style={{height: 'auto', width: '700px', backgroundColor: 'rgba(0, 0, 0, 0.8)', color: 'white'}}>
               <Card.Content>
                 <Form size="large" key="large" onSubmit={(event) => this.handleSubmit(event, this.state)} loading={this.props.authenticatingUser} error={this.props.failedLogin} >
-                  <h1>Sign Up & Find The Middle Point For You and Your <span style={{color:'blue'}}>LAZYfriends</span></h1>
+                  <h1>Sign Up & Find The Middle Point For You and Your <span style={{color:'rgba(250, 208, 155)'}}>LazyFriends</span></h1>
                   <br />
                   <Form.Field>
                     <Input

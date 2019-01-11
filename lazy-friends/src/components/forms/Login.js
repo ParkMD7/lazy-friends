@@ -28,9 +28,9 @@ class Login extends Component {
       <Container text textAlign='center'>
         <Grid>
           <Grid.Column width={16} fluid centered='true' >
-            <Card centered fluid textalign='center' style={{height: 'auto', width: '700px'}}>
+            <Card centered fluid textalign='center' style={{height: 'auto', width: '700px', backgroundColor: 'rgba(0, 0, 0, 0.8)', color: 'white'}}>
               <Card.Content centered='true' textalign='center' >
-                <h1>Log In & Find The Middle Point For You and Your <span style={{color:'blue'}}>LAZYfriends</span></h1>
+                <h1>Log In & Find The Middle Point For You and Your <span style={{color:'rgba(250, 208, 155)'}}>LazyFriends</span></h1>
                 <br /><br />
                 <Form size="large" key="large" onSubmit={this.handleLogin} loading={this.props.authenticatingUser} error={this.props.failedLogin} >
                   <Message error header={this.props.failedLogin ? this.props.error : null} />
