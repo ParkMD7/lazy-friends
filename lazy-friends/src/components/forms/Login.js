@@ -1,8 +1,12 @@
+// dependencies
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link, withRouter, Redirect } from 'react-router-dom'
+
+// user files
 import { Container, Header, Input, Button, Form, Grid, Card, Message } from 'semantic-ui-react'
 import { loginUser } from '../../actions/loginUser'
+import GoogleAuth from '../googleAuth/GoogleAuth'
 
 class Login extends Component {
   state = {
@@ -43,6 +47,8 @@ class Login extends Component {
                   <Button inverted color='red' style={{height: '35px', width: '150px'}} onClick={event => event.preventDefault()}>
                     <Link to='/signup' style={{color: '#DD6A64'}}>Sign Up</Link>
                   </Button>
+                  <h3>Or</h3>
+                  <GoogleAuth />
                 </Form>
               </Card.Content>
             </Card>

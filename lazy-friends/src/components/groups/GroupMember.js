@@ -5,7 +5,7 @@ class GroupMember extends Component {
 
   render() {
     return (
-          <Card fluid textAlign='center' style={{height:'175px', marginBottom: '15px', marginLeft: '25px', marginRight: '50px', backgroundColor: 'rgba(0, 0, 0, 0.8)', color: 'rgba(250, 208, 155)' }}>
+          <Card fluid centered style={{height:'175px', marginBottom: '15px', marginLeft: '25px', marginRight: '50px', backgroundColor: 'rgba(0, 0, 0, 0.8)', color: 'rgba(250, 208, 155)' }}>
             <Grid columns={2} divided>
               <Grid.Row stretched>
                 <Grid.Column>

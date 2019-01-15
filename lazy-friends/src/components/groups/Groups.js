@@ -33,11 +33,11 @@ class Groups extends Component {
         })
       return !usersAlreadyJoinedGroup ?
         (
-          <Card centered style={{width:'400px', opacity:'0.9'}}>
+          <Card centered style={{width:'400px', backgroundColor: 'rgba(0, 0, 0, 0.8)', color: 'rgba(250, 208, 155)'}}>
             <Card.Content>
               <Link to={`/groups/${group.id}`}>
-                <Header>Name: {group.name}</Header>
-                <Feed.Date content=<span>Updated: {group.updated_at.toString()}</span> />
+                <Header><span style={{color: 'rgba(250, 208, 155)'}}>{group.name}</span></Header>
+                <Feed.Date content=<span>Updated: {group.updated_at.toString().split('T')[0]}</span> />
               </Link>
             </Card.Content>
             <Card.Content>
@@ -72,18 +72,18 @@ class Groups extends Component {
   }
 
   render() {
+    console.log('%c Groups Page Props: ', 'color: green', this.props.allGroups);
     if(Object.keys(this.props.allGroups).length === 0){
       return <h1>Loading Groups</h1>
     }
-    console.log('%c GGroups Page Props: ', 'color: green', this.props.allGroups, this.props.currentUser);
+
     return (
       <div>
         <br/>
-        <Container centered className="ui container center aligned"><h1 style={{color: 'white'}}>Groups To Join:</h1></Container>
+        <Container centered className="ui container center aligned"><h1 style={{color: 'rgba(250, 208, 155)'}}>Groups To Join:</h1></Container>
         <br/>
         <Container centered className="ui container center aligned" style={{overflowY: 'scroll', height: '600px'}}>
           <Card.Group centered itemsPerRow={2}>
-            {/* {this.groupsToDisplay(this.props.allGroups)} */}
             {this.groupsToDisplay()}
           </Card.Group>
         </Container>

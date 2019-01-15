@@ -19,7 +19,6 @@ class GroupShowPage extends Component {
 
   render(){
     console.log('%c GroupShow Props: ', 'color: yellow', this.props);
-    debugger
 
     if(!this.props.group){
       return(
@@ -27,8 +26,8 @@ class GroupShowPage extends Component {
           <br />
           Loading...
           <br /><br />
-          <Link to='/'>
-            <Button size='massive' negative>Back To Home Page</Button>
+          <Link to='/groups'>
+            <Button size='massive' color='black'>Back To All Groups</Button>
           </Link>
         </div>
       )
@@ -40,8 +39,8 @@ class GroupShowPage extends Component {
             <Grid.Row columns={1} centered>
               <Grid.Column width={8} textAlign='center'>
                 <br />
-                <Link to='/'>
-                  <Button size='massive' color='black'>Back To Home Page</Button>
+                <Link to='/groups'>
+                  <Button size='massive' color='black'>Back To All Groups</Button>
                 </Link>
               </Grid.Column>
             </Grid.Row>

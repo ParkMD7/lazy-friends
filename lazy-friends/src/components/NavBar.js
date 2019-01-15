@@ -13,10 +13,9 @@ class NavBar extends Component {
   handleSignOut = () => this.props.signout()
 
   render(){
-    console.log('%c GoalListContainer Props: ', 'color: green', this.props.user);
     if(!this.props.user){
       return (
-        <Menu inverted size='massive' borderless style={{width: '350px', backgroundColor: 'rgba(0, 0, 0, 0)'}}>
+        <Menu inverted fluid size='massive' borderless style={{width: '350px', backgroundColor: 'rgba(0, 0, 0, 0)'}}>
           <Dropdown item text='Navigation Menu' style={{width: '200px', color: 'rgba(250, 208, 155)', 'fontFamily':'Montserrat'}}>
             <Dropdown.Menu inverted>
 

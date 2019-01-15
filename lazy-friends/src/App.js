@@ -12,6 +12,7 @@ import Login from './components/forms/Login'
 import SignUp from './components/forms/SignUp'
 import Groups from './components/groups/Groups'
 import GroupShowPage from './components/groups/GroupShowPage'
+// import GoogleAuth from './components/googleAuth/GoogleAuth'
 import { fetchCurrentUser } from './actions/loginUser'
 import './App.css';
 
@@ -28,6 +29,7 @@ class App extends Component {
         <React.Fragment>
           <br />
           <NavBarContainer />
+          {/* <GoogleAuth /> */}
           <br /><br /><br /><br />
           <Switch>
             <Route exact path="/" component={ () => <MainPage /> } />

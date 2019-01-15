@@ -21,3 +21,5 @@ yarn-debug.log*
 yarn-error.log*
 
 config.js
+# Hide google client ID
+/src/components/constants/GoogleClientId.js

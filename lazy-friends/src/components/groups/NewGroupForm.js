@@ -1,6 +1,6 @@
 // dependencies
 import React, { Component } from 'react';
-import { Button, Form, Container, Dropdown, TextArea, Input } from 'semantic-ui-react';
+import { Button, Form, Container, Dropdown, TextArea, Input, Grid, Card } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -33,21 +33,29 @@ class NewGroupForm extends Component {
   render() {
     const suggestionsOptions = this.formatSuggestions()
     return (
-        <Container style={{width: '350px'}}>
-          <Form onSubmit={event => this.handleSubmit(event)}>
-            <Form.Field>
-              <br />
-              <Input placeholder='Name' value={this.state.name} name='name' onChange={this.handleChange} />
-              <br /><br />
-              <TextArea placeholder='Group Description' name='description' value={this.state.description} onChange={this.handleChange}  />
-            </Form.Field>
-            <br />
-            <Dropdown placeholder='Select Preferred Meet Up Spot' fluid selection options={suggestionsOptions} onChange={this.handleSuggestion}/>
-            <br />
-            <Button fluid type='submit'>Create Group</Button>
-            <br />
-          </Form>
-        </Container>
+      <Container text textAlign='center'>
+        <Grid>
+          <Grid.Column width={16} fluid centered='true' >
+            <Card centered fluid textalign='center' style={{height: 'auto', width: '700px', backgroundColor: 'rgba(0, 0, 0, 0.8)', color: 'white'}}>
+              <Card.Content centered='true' textalign='center' >
+                <h1 style={{color:'rgba(250, 208, 155)'}}>Create A New Group</h1>
+                <br /><br />
+                <Form size="large" key="large" onSubmit={event => this.handleSubmit(event)} >
+                  <Form.Field>
+                    <Form.Input placeholder="Group Name" value={this.state.name} name='name' onChange={this.handleChange} />
+                    <br />
+                    <TextArea placeholder='Group Description' name='description' value={this.state.description} onChange={this.handleChange} />
+                  </Form.Field>
+                  <br />
+                  <Dropdown fluid placeholder='Select Preferred Meet Up Spot' selection options={suggestionsOptions} onChange={this.handleSuggestion}/>
+                  <br /><br />
+                  <Button fluid inverted color='red' style={{height: '40px'}} type='submit'>Create Group</Button>
+                </Form>
+              </Card.Content>
+            </Card>
+          </Grid.Column>
+        </Grid>
+      </Container>
     );
   }
 
