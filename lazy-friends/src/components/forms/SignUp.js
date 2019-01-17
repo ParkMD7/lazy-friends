@@ -49,6 +49,7 @@ class SignUp extends Component {
   }
 
   render() {
+    console.log(this.props)
     return this.props.loggedIn ? ( <Redirect to="/" /> ) : (
       <Container text textAlign='center'>
         <Grid>
@@ -117,7 +118,7 @@ class SignUp extends Component {
 
 }
 
-const mapStateToProps = ({ currentUser: { authenticatingUser, failedLogin, error, loggedIn } }) => ({
+const mapStateToProps = ({ currentUser: { authenticatingUser, failedLogin, error, loggedIn } }, ownProps) => ({
   authenticatingUser,
   failedLogin,
   error,

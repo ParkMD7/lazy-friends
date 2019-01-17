@@ -50,7 +50,7 @@ class GroupShowPage extends Component {
                 <Card centered style={{width:'400px', opacity:'0.9'}}>
                   <Card.Content>
                     <Header>Name: {this.props.group.name}</Header>
-                    <Feed.Date content=<span>Updated: {this.props.group.updated_at.toString()}</span> />
+                    <Feed.Date content={<span>Updated: {this.props.group.updated_at.toString()}</span>} />
                   </Card.Content>
                   <Card.Content>
                     <h5>Current Members:</h5>
@@ -78,7 +78,7 @@ class GroupShowPage extends Component {
                 <Card centered style={{width:'400px', opacity:'0.9', overflowY: 'scroll', height: '450px'}}>
                   <Card.Content>
                     <Header>{this.props.group.name}</Header>
-                    <Feed.Date content=<span>Recent Activity: {this.props.group.updated_at.toString().split('T')[0]}</span> />
+                    <Feed.Date content={<span>Recent Activity: {this.props.group.updated_at.toString().split('T')[0]}</span>} />
                   </Card.Content>
                   <Card.Content extra>
                     <Button fluid basic color='green' onClick={() => this.handleGroupJoin(this.props.group)}>
