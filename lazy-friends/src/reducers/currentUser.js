@@ -38,7 +38,7 @@ const userReducer = (state=defaultState, action) => {
       return defaultState
 
     case SELECT_GROUP:
-      return { ...state, currentGroup: action.group }
+      return { ...state, currentGroup: action.meta.group }
 
     case JOIN_GROUP:
       return { ...state, userGroups: [...state.userGroups, { ...action.group, users: [...action.group.users, state.user] } ], currentGroup: {...action.group, users: [...action.group.users, state.user] } }

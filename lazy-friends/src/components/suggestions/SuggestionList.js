@@ -4,62 +4,63 @@ import { connect } from 'react-redux';
 // import { testSuggs } from '../../constants/suggestions'
 
 class SuggestionList extends React.Component {
-  state = { suggestions: [] }
+  // state = { suggestions: [] }
 
-  checkResults = (results) => {
-    let isEqual = true
+  // checkResults = (results) => {
+  //   let isEqual = true
 
-    if(this.state.suggestions.length === 0){
-      return false
-    }
+  //   if(this.state.suggestions.length === 0){
+  //     return false
+  //   }
 
-    results.forEach( (result, index) => {
-      if(result.id !== this.state.suggestions[index].id){
-        isEqual = false
-      }
-    })
-    return isEqual
-  }
+  //   results.forEach( (result, index) => {
+  //     if(result.id !== this.state.suggestions[index].id){
+  //       isEqual = false
+  //     }
+  //   })
+  //   return isEqual
+  // }
 
-  getSuggestions = () => {
-    let results
+  // getSuggestions = () => {
+  //   let results
 
-    if(this.props.currentCoords !== ''){
-      return fetch('http://localhost:3000/places', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            coordinates: this.props.currentCoords,
-            preferences: this.props.currentGroup.suggestions
-          })
-        })
-      .then(response => response.json())
-      .then(yelpData => {
-        if(!!yelpData.businesses){
-          if(!(this.checkResults(yelpData.results))){
-            this.setState({
-              suggestions: yelpData.businesses
-            })
-          }
-        }
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-    }
-  }
+  //   if(this.props.currentCoords !== ''){
+  //     return fetch('http://localhost:3000/places', {
+  //         method: 'POST',
+  //         headers: {
+  //           'Accept': 'application/json',
+  //           'Content-Type': 'application/json'
+  //         },
+  //         body: JSON.stringify({
+  //           coordinates: this.props.currentCoords,
+  //           preferences: this.props.currentGroup.suggestions
+  //         })
+  //       })
+  //     .then(response => response.json())
+  //     .then(yelpData => {
+  //       if(!!yelpData.businesses){
+  //         if(!(this.checkResults(yelpData.businesses))){
+  //           this.setState({
+  //             suggestions: yelpData.businesses
+  //           })
+  //         }
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error)
+  //     })
+  //   }
+  // }
 
   render(){
-    this.getSuggestions()
-    if(this.state.suggestions.length === 0){
+    // this.getSuggestions()
+    if(!this.props.suggestions.businesses){
       return <p>There are no suggestions in this area.</p>
     }
-
-    const sortedSuggestions = this.state.suggestions.sort((a,b) => parseFloat(b.rating) - parseFloat(a.rating))
-    // const sortedSuggestions = testSuggs.sort((a,b) => parseFloat(b.rating) - parseFloat(a.rating))
+    let sortedSuggestions = []
+    if(!!this.props.suggestions.businesses){
+      sortedSuggestions = this.props.suggestions.businesses.sort((a,b) => parseFloat(b.rating) - parseFloat(a.rating))
+    } 
     const suggestionItem = sortedSuggestions.map( suggestion => (
       <SuggestionItem key={suggestion.id} suggestion={suggestion} />
     ))
@@ -73,9 +74,11 @@ class SuggestionList extends React.Component {
 };
 
 const mapStateToProps = (state) => {
+  debugger
   return {
     currentCoords: state.currentCoords,
-    currentGroup: state.currentUser.currentGroup
+    currentGroup: state.currentUser.currentGroup,
+    suggestions: state.suggestionsReducer
   }
 }
 
