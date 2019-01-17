@@ -15,3 +15,5 @@ export const JOIN_GROUP = 'JOIN_GROUP'
 export const CREATE_GROUP = 'CREATE_GROUP'
 export const LEAVE_GROUP = 'LEAVE_GROUP'
 export const SELECT_GROUP = 'SELECT_GROUP'
+
+export const SEND_EMAIL = 'SEND_EMAIL'
