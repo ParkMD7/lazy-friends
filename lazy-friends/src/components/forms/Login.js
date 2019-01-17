@@ -1,7 +1,7 @@
 // dependencies
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { Link, withRouter, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { Link, withRouter, Redirect } from 'react-router-dom';
 
 // user files
 import { Container, Header, Input, Button, Form, Grid, Card, Message } from 'semantic-ui-react'

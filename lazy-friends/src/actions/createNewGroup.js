@@ -13,7 +13,6 @@ export const createNewGroup = (userID, newGroupName, suggestion, description) =>
         description
       }
   })
-  debugger
   return {
     type: CREATE_GROUP,
     payload: request

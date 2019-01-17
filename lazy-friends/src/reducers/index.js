@@ -1,4 +1,8 @@
+// dependencies
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form'
+
+// user files
 import currentUser from './currentUser';
 import groupsReducer from './groupsReducer';
 import currentCoords from './currentCoords';
@@ -8,5 +12,7 @@ export default combineReducers({
   currentUser,
   groupsReducer,
   currentCoords,
-  googleAuthReducer
+  googleAuthReducer,
+  // the following 'form' key is required syntax by 'redux-form'
+  form: formReducer
 });
