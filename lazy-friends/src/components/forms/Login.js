@@ -23,12 +23,27 @@ class Login extends Component {
   handleLogin = e => {
     e.preventDefault()
     this.props.loginUser(this.state.username, this.state.password)
+    if(!!this.props.location.state){
+      if(!!this.props.location.state.fromPage){
+        this.props.history.push({ pathname: this.props.location.state.oldPath })
+      }
+    }
     this.setState({ username: '', password: '' })
   }
 
+  handleLink = () => {
+    if(!!this.props.location.state){
+      if(!!this.props.location.state.fromPage){
+        return <Redirect to={this.props.location.state.oldPath} />
+      }
+    } else {
+      return <Redirect to='/' />
+    }
+  }
+
   render() {
-    return this.props.loggedIn ? (<Redirect to='/' />) :
-    (
+    return this.props.loggedIn ? this.handleLink() :
+     (
       <Container text textAlign='center'>
         <Grid>
           <Grid.Column width={16} fluid centered='true' >
@@ -45,7 +60,11 @@ class Login extends Component {
                   <br /><br />
                   <h3>Don't Already Have An Account?</h3>
                   <Button inverted color='red' style={{height: '35px', width: '150px'}} onClick={event => event.preventDefault()}>
-                    <Link to='/signup' style={{color: '#DD6A64'}}>Sign Up</Link>
+                    {
+                      !!this.props.location.state ? 
+                      <Link to={{ pathname: '/signup', state: { fromPage: this.props.location.state.fromPage, oldPath: this.props.location.state.oldPath }}} style={{color: '#DD6A64'}}>Sign Up</Link> :
+                      <Link to='/signup' style={{color: '#DD6A64'}}>Sign Up</Link>
+                    }
                   </Button>
                   <h3>Or</h3>
                   <GoogleAuth />
@@ -59,7 +78,7 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = ({ currentUser: { user, authenticatingUser, failedLogin, error, loggedIn }}) => {
+const mapStateToProps = ({ currentUser: { user, authenticatingUser, failedLogin, error, loggedIn }}, ownProps) => {
   return {user, authenticatingUser, failedLogin, error, loggedIn}
 }
 

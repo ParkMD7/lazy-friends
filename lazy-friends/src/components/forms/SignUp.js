@@ -45,12 +45,27 @@ class SignUp extends Component {
         location: '',
         profile_url: ''
       })
+      if(!!this.props.location.state){
+        if(!!this.props.location.state.fromPage){
+          this.props.history.push({ pathname: this.props.location.state.oldPath })
+        }
+      }
     })
+  }
+
+  handleLink = () => {
+    if(!!this.props.location.state){
+      if(!!this.props.location.state.fromPage){
+        return <Redirect to={this.props.location.state.oldPath} />
+      }
+    } else {
+      return <Redirect to='/' />
+    }
   }
 
   render() {
     console.log(this.props)
-    return this.props.loggedIn ? ( <Redirect to="/" /> ) : (
+    return this.props.loggedIn ? this.handleLink() : (
       <Container text textAlign='center'>
         <Grid>
           <Grid.Column width={16} fluid centered='true' >
@@ -105,7 +120,11 @@ class SignUp extends Component {
                   <Button inverted color='red' type='submit' style={{height: '35px', width: '150px'}}>Sign Up</Button>
                   <h3>Already Have An Account?</h3>
                   <Button inverted color='red' style={{height: '35px', width: '150px'}} onClick={event => event.preventDefault()}>
-                    <Link to='/login' style={{color: '#DD6A64'}}>Log In</Link>
+                    {
+                      !!this.props.location.state ? 
+                      <Link to={{ pathname: '/login', state: { fromPage: this.props.location.state.fromPage, oldPath: this.props.location.state.oldPath }}} style={{color: '#DD6A64'}}>Log In</Link> :
+                      <Link to='/login' style={{color: '#DD6A64'}}>Log In</Link>
+                    }
                   </Button>
                 </Form>
               </Card.Content>

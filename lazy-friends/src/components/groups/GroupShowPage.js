@@ -16,10 +16,11 @@ class GroupShowPage extends Component {
     this.props.fetchGroup(groupID);
   }
 
-
   render(){
     console.log('%c GroupShow Props: ', 'color: yellow', this.props);
-
+    if(!this.props.loggedIn){
+      this.props.history.push({ pathname: '/login', state: { fromPage: true, oldPath: `/groups/${this.props.match.params.id}` }})
+    }
     if(!this.props.group){
       return(
         <div>
@@ -98,7 +99,8 @@ class GroupShowPage extends Component {
 const mapStateToProps = ({ currentUser, groupsReducer }, ownProps) => ({
   // this GroupShowPage component will now only recieve the 1 that a user clicks on
   group: groupsReducer[ownProps.match.params.id],
-  user: currentUser.user
+  user: currentUser.user,
+  loggedIn: currentUser.loggedIn
 })
 
 export default withRouter(connect(mapStateToProps, { fetchGroup, joinGroup })(GroupShowPage));
