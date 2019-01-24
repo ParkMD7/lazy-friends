@@ -1,5 +1,5 @@
 // user files
-import { SET_CURRENT_USER, AUTHENTICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, SIGNOUT, JOIN_GROUP, LEAVE_GROUP, CREATE_GROUP, SELECT_GROUP, SEND_EMAIL } from '../constants';
+import { SET_CURRENT_USER, AUTHENTICATING_USER, AUTHENTICATED_USER, FAILED_LOGIN, SIGNOUT, JOIN_GROUP, LEAVE_GROUP, CREATE_GROUP, SELECT_GROUP, SEND_EMAIL, SEND_INVITE } from '../constants';
 
 const defaultState = {
   user: null,
@@ -51,6 +51,10 @@ const userReducer = (state=defaultState, action) => {
       return { ...state, userGroups: [...updatedUserGroups] }
 
     case SEND_EMAIL:
+      return action.payload.data
+
+    case SEND_INVITE:
+      debugger
       return action.payload.data
 
     default:

@@ -11,7 +11,6 @@ export const sendGroupInviteEmail = (userID, email_message) => {
     id: userID,
     message: email_message
   })
-  debugger
 
   return {
     type: SEND_EMAIL,

@@ -17,3 +17,4 @@ export const LEAVE_GROUP = 'LEAVE_GROUP'
 export const SELECT_GROUP = 'SELECT_GROUP'
 
 export const SEND_EMAIL = 'SEND_EMAIL'
+export const SEND_INVITE = 'SEND_INVITE'

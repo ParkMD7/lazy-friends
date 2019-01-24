@@ -26,12 +26,4 @@ class GroupList extends React.Component {
   }
 }
 
-// const mapStateToProps = (state, ownProps) => {
-//   return {
-//     currentGroup: state.currentUser.currentGroup,
-//     selectedGroup: state.groupsReducer[ownProps.match.params.id]
-//   }
-// }
-
-// export default connect(mapStateToProps)(GroupList);
 export default GroupList;

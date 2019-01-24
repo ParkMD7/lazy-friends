@@ -1,6 +1,9 @@
+// dependencies
 import React from 'react'
 import { Card, Image, Grid, Button, Icon } from 'semantic-ui-react'
 
+// user files
+import EventInviteModal from '../eventInviteModal'
 
 const SuggestionItem = ({suggestion}) => {
   // console.log('%c SuggestionItem Props: ', 'color: pink', suggestion)
@@ -8,6 +11,10 @@ const SuggestionItem = ({suggestion}) => {
   const handleCreateGroupEvent = (event) => {
     event.preventDefault()
     console.log('Event Created')
+  }
+
+  const group_invite = () => {
+
   }
 
   return (
@@ -36,10 +43,11 @@ const SuggestionItem = ({suggestion}) => {
           </Grid>
         </Card.Content>
         <Card.Content extra>
-          <Button style={{color: 'black', backgroundColor: 'rgba(250, 208, 155)'}} fluid onClick={() => this.handleCreateGroupEvent()}>
+          {/* <Button style={{color: 'black', backgroundColor: 'rgba(250, 208, 155)'}} fluid onClick={() => this.handleCreateGroupEvent()}>
             <Icon name='plus' />
             Create Group Event At <span style={{textDecoration: 'underline'}}>{suggestion.name}</span>
-          </Button>
+          </Button> */}
+          <EventInviteModal />
         </Card.Content>
       </Card>
     </div>
