@@ -82,7 +82,7 @@ class GroupShowPage extends Component {
                     <Feed.Date content={<span>Recent Activity: {this.props.group.updated_at.toString().split('T')[0]}</span>} />
                   </Card.Content>
                   <Card.Content extra>
-                    <Button fluid basic color='green' onClick={() => this.handleGroupJoin(this.props.group)}>
+                    <Button fluid basic color='green' onClick={() => this.props.joinGroup(this.props.user.id, this.props.group)}>
                       Join Group
                     </Button>
                   </Card.Content>
