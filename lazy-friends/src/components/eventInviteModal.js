@@ -22,7 +22,7 @@ class EventInviteModal extends Component {
   handleEmailSubmit = () => {
     const groupID = this.props.currentUser.currentGroup.id.toString()
     debugger
-    this.props.sendEventInviteToGroup(groupID, this.state.email_message)
+    this.props.sendEventInviteToGroup(groupID, this.state.email_message, this.props.location, this.props.currentUser.user.id)
     alert('Your Email Has Been Submitted!')
   }
 

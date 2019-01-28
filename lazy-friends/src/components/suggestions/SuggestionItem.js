@@ -47,7 +47,7 @@ const SuggestionItem = ({suggestion}) => {
             <Icon name='plus' />
             Create Group Event At <span style={{textDecoration: 'underline'}}>{suggestion.name}</span>
           </Button> */}
-          <EventInviteModal />
+          <EventInviteModal location={suggestion.location.display_address.join(' ')}/>
         </Card.Content>
       </Card>
     </div>
