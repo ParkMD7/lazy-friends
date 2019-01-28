@@ -13,7 +13,7 @@ class EmailModal extends Component {
 
     this.state = {
       email_message: `Dear Friend, \n
-        Please join our sick group at:
+        Please join our group at:
         http://localhost:3001/groups/1`
     }
   }

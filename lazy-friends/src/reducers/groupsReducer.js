@@ -20,8 +20,8 @@ export default function(state=defaultState, action){
       // add the newly fetched group that a user has clicked on as a new key:value pair
       return { ...state, [action.payload.data.id]: action.payload.data }
 
-    case CREATE_GROUP:
-      return { ...state, groups: [...state.groups, action.payload.data] }
+    // case CREATE_GROUP:
+    //   return { ...state, groups: [...state.groups, action.payload.data] }
 
 
     default:

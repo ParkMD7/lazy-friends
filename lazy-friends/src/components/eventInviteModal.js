@@ -29,7 +29,7 @@ class EventInviteModal extends Component {
   render(){
     return(
       <Modal trigger={<Button width='1000px' size='huge' color='red'>Create An Event Here</Button>} closeIcon>
-        <Header icon='mail' content='Remind Your Local Rep That Climate Change Is An Important Issue to You' />
+        <Header icon='mail' content='Send an Event Invitation To Your Lazy Friends' />
         <Modal.Content>
           <Form size="small" key="small" >
             <Form.TextArea name="summary" value={this.state.email_message} style={{height: '450px'}} disabled/>
